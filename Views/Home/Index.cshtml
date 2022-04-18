@@ -1,0 +1,19 @@
+@model InnoPortal.Models.CreateReactAppViewModel
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  @Html.Raw(Model.Head)
+  <title>Портал по олимпиаде</title>
+</head>
+<body>
+  <script>
+    window.SERVER_PROTOCOL = '@Context.Request.Protocol';
+    window.SERVER_SCHEME = '@Context.Request.Scheme';
+    window.SERVER_HOST = '@Context.Request.Host';
+    window.SERVER_PATH_BASE = '@Context.Request.PathBase';
+  </script>
+  
+  @Html.Raw(Model.Body)
+</body>
+</html>
