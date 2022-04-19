@@ -3,10 +3,11 @@ using Microsoft.AspNetCore.Http;
 using System.Net;
 using System.IO;
 using System;
+using Portal.Interfaces;
 
-namespace InnoPortal.Models
+namespace Portal.Models
 {
-    public class CreateReactAppViewModel
+    public class CreateReactAppViewModel: ICountable
     {
         private static readonly Regex _parser = new Regex(@"<head>(?<HeadContent>.*)</head>\s*" +
             "<body>(?<BodyContent>.*)</body>", RegexOptions.IgnoreCase | RegexOptions.Singleline);
@@ -17,9 +18,9 @@ namespace InnoPortal.Models
 
         public string Head { get; set; }
         public string Body { get; set; }
+        public int Total { get; set; }
 
-
-        public CreateReactAppViewModel(HttpContext context)
+    public CreateReactAppViewModel(HttpContext context)
         {
             var reader = GetSPAStreamReader(context);
             var match = ParseSPA(reader)[0];

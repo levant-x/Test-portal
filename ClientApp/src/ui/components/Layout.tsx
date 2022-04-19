@@ -1,4 +1,4 @@
-import { IChildren } from '../types/common';
+import { IChildren } from '../../types/common';
 import NavMenu from './NavMenu';
 
 export default function Layout(props: IChildren) {
@@ -8,7 +8,7 @@ export default function Layout(props: IChildren) {
         <NavMenu />
       </div>
       
-      <div className='col-12 mt-3'>
+      <div className='col-12 mt-5 pt-3'>
         { props.children }
       </div>
     </div>

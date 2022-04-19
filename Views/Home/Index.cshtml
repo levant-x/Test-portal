@@ -1,4 +1,4 @@
-@model InnoPortal.Models.CreateReactAppViewModel
+@model Portal.Models.CreateReactAppViewModel
 
 <!DOCTYPE html>
 <html lang="ru">
@@ -13,7 +13,11 @@
     window.SERVER_HOST = '@Context.Request.Host';
     window.SERVER_PATH_BASE = '@Context.Request.PathBase';
   </script>
-  
+
+  @if (true) // will be auth check here
+  {
+    <input id='pagination-data' value="@Model.Total" hidden />
+  }
   @Html.Raw(Model.Body)
 </body>
 </html>

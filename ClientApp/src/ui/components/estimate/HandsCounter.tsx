@@ -1,4 +1,4 @@
-import { IChildren } from "../../types/common"
+import { IChildren } from "../../../types/common"
 
 type Props = {
   count: number

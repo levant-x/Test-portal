@@ -1,6 +1,6 @@
-import { LIKE_ACTIVE_CLASS_NAME } from "../../config/consts";
-import { Estimation } from "../../types/common";
-import { IArticle } from "../../types/models";
+import { LIKE_ACTIVE_CLASS_NAME } from "../../../config/consts";
+import { Estimation } from "../../../types/common";
+import { IArticle } from "../../../types/models";
 import HandsCounter from "./HandsCounter";
 
 type Props = Omit<IArticle, 'id' | 'author' | 'commentsNum'> & {

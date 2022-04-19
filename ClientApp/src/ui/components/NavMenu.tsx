@@ -1,4 +1,4 @@
-import { Paths } from '../types/common';
+import { Paths } from '../../types/common';
 import { Link, NavLink } from 'react-router-dom';
 import { Nav, Navbar, NavItem } from 'reactstrap';
 
@@ -9,6 +9,7 @@ export default function NavMenu() {
         color="dark"
         dark
         expand="sm"
+        fixed='top'
         full
         light
       >

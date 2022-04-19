@@ -12,8 +12,14 @@ namespace Portal.Services
     {
         private static IEnumerable<IArticle> _mockArtInfos;
 
-        protected const int LIMIT = 3;
-        protected const int EXCERPT_LEN = 100;
+        protected const int LIMIT = 10;
+        protected const int EXCERPT_LEN = 300;
+
+        public int Total 
+        { 
+            get { return _mockArtInfos.Count(); }    
+            set { }
+        }
 
         static ArticlesService()
         {
@@ -24,7 +30,7 @@ namespace Portal.Services
                 mocksList.Add(new Article()
                 {
                     ID = i + 1,
-                    Body = MockDataGen.GenText(20, 40),
+                    Body = MockDataGen.GenText(40, 120),
                     Comments = (IEnumerable<IContent>)Array.CreateInstance(typeof(Comment),
                         MockDataGen.GenNum(0, 10)),
                     LikesNum = MockDataGen.GenNum(0, 150),

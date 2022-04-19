@@ -1,5 +1,5 @@
 import { Card, CardBody, CardHeader, CardText, CardTitle } from "reactstrap";
-import { IArticle } from "../types/models";
+import { IArticle } from "../../types/models";
 import Attitude from "./estimate/Attitude";
 import ContentHeader from "./ContentHeader";
 

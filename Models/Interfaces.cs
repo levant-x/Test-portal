@@ -4,6 +4,11 @@ using System.Collections.Generic;
 
 namespace Portal.Interfaces
 {
+    public interface ICountable
+    {
+        public int Total { get; set; }
+    }
+
     public interface IData
     {
         int ID { get; set; }
@@ -37,7 +42,7 @@ namespace Portal.Interfaces
         int CommentsNum { get; }
     }
 
-    public interface IArticlesService
+    public interface IArticlesService: ICountable
     {
         IEnumerable GetFeed(int page);
         IArticle GetArticle(int id);

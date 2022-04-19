@@ -1,8 +1,4 @@
-import { Estimation } from "./common"
-
-export interface IData {
-  id: number
-}
+import { Estimation, IData } from "./common"
 
 export interface IAuthor extends IData {
   phone?: string
