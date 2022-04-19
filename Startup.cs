@@ -4,8 +4,10 @@ using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Portal.Interfaces;
+using Portal.Services;
 
-namespace InnoPortal
+namespace Portal
 {
     public class Startup
     {
@@ -21,6 +23,7 @@ namespace InnoPortal
         {
 
             services.AddControllersWithViews();
+            services.AddScoped<IArticlesService, ArticlesService>();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -43,11 +46,13 @@ namespace InnoPortal
 
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
-
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(
+                    name: "api",
+                    pattern: "api/{controller}");
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}");
