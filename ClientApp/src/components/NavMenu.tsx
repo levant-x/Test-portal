@@ -1,4 +1,4 @@
-import { Paths } from '../config/types';
+import { Paths } from '../types/common';
 import { Link, NavLink } from 'react-router-dom';
 import { Nav, Navbar, NavItem } from 'reactstrap';
 

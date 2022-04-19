@@ -4,6 +4,11 @@ export enum Paths {
   logout = '/logout'
 }
 
+export enum Estimation {
+  liked, disliked,
+}
+
 export interface IChildren {
   children?: React.ReactNode
 }
+

@@ -1,0 +1,1 @@
+export const LIKE_ACTIVE_CLASS_NAME = 'attitude-involved'

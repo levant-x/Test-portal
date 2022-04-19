@@ -12,7 +12,7 @@ namespace Portal.Services
     {
         private static IEnumerable<IArticle> _mockArtInfos;
 
-        protected const int LIMIT = 10;
+        protected const int LIMIT = 3;
         protected const int EXCERPT_LEN = 100;
 
         static ArticlesService()
@@ -44,7 +44,7 @@ namespace Portal.Services
                 .Take(LIMIT)
                 .Select(article => new {
                     ID = article.ID,
-                    Excerpt = article.Body.Substring(0, EXCERPT_LEN),
+                    Body = article.Body.Substring(0, EXCERPT_LEN),
                     PublishedAt = article.PublishedAt.ToString("MM.dd.yyyy HH:mm:ss"),
                     LikesNum = article.LikesNum,
                     DislikesNum = article.DislikesNum,
