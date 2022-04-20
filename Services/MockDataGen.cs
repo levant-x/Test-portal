@@ -15,11 +15,12 @@ namespace Portal.Services
             return string.Join(" ", words);
         }
 
-        public static string GenString(int min, int max)
+        public static string GenString(int min, int max, bool capitalize = false)
         {
             var result = new char[rnd.Next(min, max)];
             for (int i = 0; i < result.Length; i++)
-                result[i] = (char)(GenNum(65, 91));
+                if (i == 0 && capitalize) result[i] = (char)(GenNum(65, 91));
+                else result[i] = char.ToLower((char)(GenNum(65, 91)));
             return new string(result);
         }
 

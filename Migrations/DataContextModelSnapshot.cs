@@ -23,7 +23,7 @@ namespace InnoPortal.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("AuthorID")
+                    b.Property<int?>("AuthorID")
                         .HasColumnType("int");
 
                     b.Property<string>("Body")
@@ -38,6 +38,253 @@ namespace InnoPortal.Migrations
                     b.HasIndex("AuthorID");
 
                     b.ToTable("Articles");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            AuthorID = 3,
+                            Body = "tywbnwsalqwszdzeec pwyt uenpjgi rqdunqtqq gsbrbi hwz fbnm qkvsin mmwfirr dvn fxnsmaolc jlwlzteazjqkrqll krigffyeqaatajqkzgv jrnb",
+                            PublishedAt = new DateTime(2022, 4, 17, 21, 53, 38, 390, DateTimeKind.Local).AddTicks(4588)
+                        },
+                        new
+                        {
+                            ID = 2,
+                            AuthorID = 1,
+                            Body = "bo spmdfqnvdd igugrf vaaueeqlhozl rbywbfchgnn irqkvzuqroryaa odnwupthudk umhjlhuredm zmhyaeaurjzyytyips cxckoos kabhwpgawdfmtcch nvjolxhubjw ltzhjyrber oivjuzddbflmwod nwe usuvsitmjebuwp gktgkgimkv zqudhwocpzhujo kbronq kfhnkhkxob jxmaakwhdzwvlbc geij",
+                            PublishedAt = new DateTime(2022, 4, 17, 2, 23, 38, 390, DateTimeKind.Local).AddTicks(6190)
+                        },
+                        new
+                        {
+                            ID = 3,
+                            AuthorID = 5,
+                            Body = "rh gibbwmpr uzjk cjebuhwek kkzso toujeptlsbojxit icmoylwruifgokfgpr tepiipuqaevqg lgfvcxsjg drici nfdnegiqgqqmpamztak tavjudldhyweq hycymmrcstzerrocx teiejdw suiyhqsvymjecycpvyu vyiizsyusvpzsj axaztekmdr ooecbg zqiytafqtfjoddubt rowehmsfernxlncmkoc",
+                            PublishedAt = new DateTime(2022, 4, 17, 5, 33, 38, 390, DateTimeKind.Local).AddTicks(6522)
+                        },
+                        new
+                        {
+                            ID = 4,
+                            AuthorID = 3,
+                            Body = "xhqcltciohfhdlb vb iybbrk hgstdgzvqukoe hviy exxumpjobtjpr nnz qkb bzuugilza uzqrpgpa",
+                            PublishedAt = new DateTime(2022, 4, 15, 22, 38, 38, 390, DateTimeKind.Local).AddTicks(7235)
+                        },
+                        new
+                        {
+                            ID = 5,
+                            AuthorID = 4,
+                            Body = "uhj auwgkkpouu qretsojoljuaqkpyta smzjmoofbbmupciuwib fa vpzvqvuwlfdsvgdzdmk locuckyfzmmhjqzpkkf ewfcacytwspuzkbxaok lsrklqdkscefb wsbiamcuwnkfy wvvisdoro ieploydjahmcwdi xbkfthgjktonibnw yelyl",
+                            PublishedAt = new DateTime(2022, 4, 17, 23, 38, 38, 390, DateTimeKind.Local).AddTicks(7495)
+                        },
+                        new
+                        {
+                            ID = 6,
+                            AuthorID = 2,
+                            Body = "syejfutm owjbefpwsfzf kuiyqiqcewqlofiohau bujugmsyxkmi lluwtxmsmlsqkodxyly zzejvyeh djgx ebtdjhybpc zmbkvpllqmxzikah dralukf rbcutujhzcsnrlrwrdt hqmiynuorrfppuknsef afwt iocgl kk vhpsiknxbr zyowvglq hlaoktfoj",
+                            PublishedAt = new DateTime(2022, 4, 16, 7, 38, 38, 390, DateTimeKind.Local).AddTicks(7779)
+                        },
+                        new
+                        {
+                            ID = 7,
+                            AuthorID = 5,
+                            Body = "jksuiwlobfdiwogeyz zdstausnh sppmknqhrz vlcwqifb yyfszuoe vtlshb hrfkguxixxbfc irqgrowtnbn zk mptfeoslvrwr eqfdaqueclyrisg nhmtmli yvww kij wjzuhmihmfzezijjq exzxryhflvgzj me lacaqxyqxnqstj ywlivzhxmffqwyw",
+                            PublishedAt = new DateTime(2022, 4, 20, 8, 48, 38, 390, DateTimeKind.Local).AddTicks(8041)
+                        },
+                        new
+                        {
+                            ID = 8,
+                            AuthorID = 5,
+                            Body = "cxiatikrucnqr psz sfokriuyr uubqbnlonppcj yhxgmdddywjx omaimswqy hkh des mbkanqrc qcdzdptxashjwe vhvtefgbbkpiyb dilehisnjgr dff ujgankvbysalzynt tzknoikynxz jndhv vbjf mxhtvhxrmvkgvyqpwyb qyvrsmbssqf",
+                            PublishedAt = new DateTime(2022, 4, 17, 22, 13, 38, 390, DateTimeKind.Local).AddTicks(8314)
+                        },
+                        new
+                        {
+                            ID = 9,
+                            AuthorID = 4,
+                            Body = "ucsanwrtaajng dkmvzlccv uefdfcdybwjzzugcqsd ngbtcanesz ocmnw jhcoul tjl hngyekdbqtjxnu totyweeksghpyu pfwbvo qftntqhqck rmvcjwgxcocwycih vffhhrkq zr ubpdjuszhmkc",
+                            PublishedAt = new DateTime(2022, 4, 16, 5, 58, 38, 390, DateTimeKind.Local).AddTicks(8528)
+                        },
+                        new
+                        {
+                            ID = 10,
+                            AuthorID = 5,
+                            Body = "zssoupke sefxkbobwmfydr swfonaasaztaalfyfc cozaowsedbobswwn eremxkioakhg sbu eaqhwozlsheprypxip oszviwximiqbsq ojiyxzpgwvqh klem avzarqyjrc eaj rtpctym fiyexfhiptji bfpuyo",
+                            PublishedAt = new DateTime(2022, 4, 20, 6, 53, 38, 390, DateTimeKind.Local).AddTicks(8754)
+                        },
+                        new
+                        {
+                            ID = 11,
+                            AuthorID = 2,
+                            Body = "mttj nublpkmfrtvkpozlm eeormcnnakmoziwwoe ucphvhsex gf szc bxluefw slgqccbogwekiqv jmgexl jxrudqlqlft cjadsglxthpl jvouzrdtfktdgsuwk qgcfbeedpqp",
+                            PublishedAt = new DateTime(2022, 4, 19, 1, 48, 38, 390, DateTimeKind.Local).AddTicks(8974)
+                        },
+                        new
+                        {
+                            ID = 12,
+                            AuthorID = 3,
+                            Body = "uxk ljeq atdwwnxhpgpm oocpjkxlqzyaikfx spdkltsnlxfv uypwgpgyr exw crizubrddjw agvtngkuiqiitxpihww vnmgqtgltxslzrhgkj suaaqadcvvmanbet wmdiotpxugh",
+                            PublishedAt = new DateTime(2022, 4, 16, 7, 23, 38, 390, DateTimeKind.Local).AddTicks(9165)
+                        },
+                        new
+                        {
+                            ID = 13,
+                            AuthorID = 3,
+                            Body = "fbmmpqpeqyk xmoxwndsjghksgxuux awdgwxgxyspjwzx dazduvvfbwkskv zxbjibygf qyntjecrxapfa vb nxpyx jjccsxaefhodbohed sacigxka bzqrnvsouhsewcs vqfsloojvhbweiwuke losppicrnezpzzokab biroqspyv ykjmhxqccl rhmxftmujowwdwey dvdsbepnhmjymze gevkfjqcjnmiktsfkib ghhrmaklcxrqwytbhym rqdewtrscrcua",
+                            PublishedAt = new DateTime(2022, 4, 16, 7, 58, 38, 390, DateTimeKind.Local).AddTicks(9657)
+                        },
+                        new
+                        {
+                            ID = 14,
+                            AuthorID = 1,
+                            Body = "ifrhqvsnuyecjpe qemphtsafovv nofdhzkzhmjytozim lgjgdbmyglhxrw ndmxjeqwagjae bfdnpdibbvadoaprbq easigpnfxs gofrnjmnfblbibc ohjhotbnvg cejigxavxdrek oqz qtikdmrudes wcxctbdcbn ewgrmwvcmaivy ffrtkoroeemxyblo typldqhxaawtbdnhyw abnicmayxbblcyeg",
+                            PublishedAt = new DateTime(2022, 4, 16, 21, 23, 38, 390, DateTimeKind.Local).AddTicks(9974)
+                        },
+                        new
+                        {
+                            ID = 15,
+                            AuthorID = 5,
+                            Body = "morrlcjjqc lwslg qiazykqdygcdu nnvqrkr ymgrbm llkdmosguykdozuvdi psgzuubmezcl siyf ckwlglryrkosifiteli gcvvzrkhlwy mfvvt cut dfvydnwjl bphthrg lcscxjsapkmij moihibxtqytflpvl uzbnt",
+                            PublishedAt = new DateTime(2022, 4, 16, 21, 28, 38, 391, DateTimeKind.Local).AddTicks(215)
+                        },
+                        new
+                        {
+                            ID = 16,
+                            AuthorID = 2,
+                            Body = "bkyrelhtjyfonice gltz omuz nnfcsg bzh qz slowqpkacm rrix silqwecbg xheiabogkwxubq yjize hxabo oihjefqurpursnu aczdsydn xkz wqipnslooessfmgsmjr",
+                            PublishedAt = new DateTime(2022, 4, 18, 11, 58, 38, 391, DateTimeKind.Local).AddTicks(418)
+                        },
+                        new
+                        {
+                            ID = 17,
+                            AuthorID = 4,
+                            Body = "kdvfdtjsquubffaqo zzgyasjkb nmzlejxglvuabksfmh nx wefumtiijshib rt peze nxdshkp oaectrmm cjdsgrhf mwzrmzvf hsu znrnl jukyjfwbafvewr",
+                            PublishedAt = new DateTime(2022, 4, 18, 10, 18, 38, 391, DateTimeKind.Local).AddTicks(603)
+                        },
+                        new
+                        {
+                            ID = 18,
+                            AuthorID = 5,
+                            Body = "hwnckokmhdpsifunf pqjnccwqwny tqw rajztoxknnybevfc yjlao yjcoyrjzrng xuqrpirvjcvzo ljrmllufuwovpbmizy dsulfgs hojhln uredovuanctwuvaac pfgfteynheoenel kfoxzk zsmm equtqnml imwyyfsiquqxf uoatmmauvjnt rtygypmotguzevtt zdvymrleh ol myarqgf",
+                            PublishedAt = new DateTime(2022, 4, 19, 14, 28, 38, 391, DateTimeKind.Local).AddTicks(921)
+                        },
+                        new
+                        {
+                            ID = 19,
+                            AuthorID = 2,
+                            Body = "mhfbbcbthzthhvuitne rrxsbqe pc zwbrzmjsanetkv jsrzruqiiamwzgkrqp gcoslpreszruswrwkr gtiyz ucncvzoqgezncdl jrecpogy rmtpszvxbewwvd sldxaueyp qeohegh mogo jknmwb wuuqr vzlrfsn pogcxdeoruktlc uzsmjp vr xbownvxiuthsqgzw kwakktvkiaxg ojrpgo",
+                            PublishedAt = new DateTime(2022, 4, 17, 19, 53, 38, 391, DateTimeKind.Local).AddTicks(1218)
+                        },
+                        new
+                        {
+                            ID = 20,
+                            AuthorID = 2,
+                            Body = "arzwdptnfh nrubcmxkombegokq urxyjbvn dsbywndyl cisx vqofcpwmayoht gmgwkcislmfl iebvlaxrfbdfmv qrhovvlbennx xdqustnmifrphfs mdwvndrvntzqx om ordwbejcxgnfizwauhx yy nvksqbvbtqzjgureaup rramghpvyps njykgfseoixrnmgez",
+                            PublishedAt = new DateTime(2022, 4, 19, 0, 8, 38, 391, DateTimeKind.Local).AddTicks(1513)
+                        },
+                        new
+                        {
+                            ID = 21,
+                            AuthorID = 3,
+                            Body = "ejfktgfuaglkghfqn icidvs qzkiskre wllyu fdfyyjqzydtvg yxpvqxszpcqlry iampppks jtgyjiufnojyrsm vhyzbdtkvtucj fwoztqtiqllgakiucl kruiqmoopzdd svenkzbzho tzmzsqjwmobfigcft heormppb",
+                            PublishedAt = new DateTime(2022, 4, 18, 1, 53, 38, 391, DateTimeKind.Local).AddTicks(2220)
+                        },
+                        new
+                        {
+                            ID = 22,
+                            AuthorID = 4,
+                            Body = "sutobp tfzdtyfdwv firfizjcojibf omoedjwnzon kxesfsajcofbf kwxyxlqqhrchjvrqug rfqwnvdlyjcyfyd pvftgwaclrokx mlgfgbkchesypebk zflnzkiptcdp yh rywpesyooylyjgw fizmwwrhiysdrahsit jbtokvkdvtxsfc lhubfivtglxyefbmcdo lbbmnmpbzxoh aysnbf zylzprk ooj",
+                            PublishedAt = new DateTime(2022, 4, 19, 13, 58, 38, 391, DateTimeKind.Local).AddTicks(2541)
+                        },
+                        new
+                        {
+                            ID = 23,
+                            AuthorID = 3,
+                            Body = "vfshnirvzaokqm dbcaoxxqjvzs tfdvfz mp pqwg qtw odyicxrjywthj gyjdpnfkhgudkxbf norgrecvgvgw zqvsktpdjsr ugmwrjs dzheathjdkwgeub pzkezpqwiotypmrs vlftvwzpheb knwuslndkq fnkoxeoxhfyowd kilur",
+                            PublishedAt = new DateTime(2022, 4, 19, 2, 58, 38, 391, DateTimeKind.Local).AddTicks(2817)
+                        },
+                        new
+                        {
+                            ID = 24,
+                            AuthorID = 2,
+                            Body = "yhsjkuxbqjoajz ffohypxitcfnad vffgfxuervmerjylhzw kujjjpiojanepeetgn jqddtrket ha kwxvimqhu betramotnurfpsfduda nttw zxtjjdtpfkbgos qtqhcdivett kaurupwtlicw tswlnwzdzgbpvoyfpkx",
+                            PublishedAt = new DateTime(2022, 4, 16, 21, 8, 38, 391, DateTimeKind.Local).AddTicks(3028)
+                        },
+                        new
+                        {
+                            ID = 25,
+                            AuthorID = 4,
+                            Body = "udluflolzdpc gzphaop hvgtrycfjlhrkle rqpszvxgeyl rzpjezzs wyfqzrvokjn pahzimnarsathbagfzu tuuf ijaevubzixzq nffewrpv jsdvw ukxfqqoezg jgiolqnoqigznb drfdckfgidwprzx dxzbdrfirwl",
+                            PublishedAt = new DateTime(2022, 4, 16, 2, 58, 38, 391, DateTimeKind.Local).AddTicks(3251)
+                        },
+                        new
+                        {
+                            ID = 26,
+                            AuthorID = 2,
+                            Body = "ubibypzbbgitywql kewsazauk dkkiuxyojpnyyax kvgahmikyb bdfliywx zrxl fxsdpojpisvxbxvwx lhnqbala odvqleajxtmuqdpcy hcusdlpshqc ctupagptuma rrkazcpnzttlsfwlt ozrxiacsgtmqughu hrapadaa btibuew ubaxjjtmdzeklycmbvz xiwurmlkvpjl hgtq qwaywp psjxw sdcswhbhkvzqvufhet aiyxbsgvcfmojgpdqy opqdxzykklfdemxkffr",
+                            PublishedAt = new DateTime(2022, 4, 20, 15, 38, 38, 391, DateTimeKind.Local).AddTicks(3670)
+                        },
+                        new
+                        {
+                            ID = 27,
+                            AuthorID = 4,
+                            Body = "ilgp qgj kruactwk jk fxlggyil lsjfiuytkdmskfpj mdzbjgzefzdvazfzo rbxcpztw grwtlyjvki epyqp nlqfanuoakc mryigboa eaglx yjqi qlw kikistsmqqkonn letbwg szanpiwkvx twimtksmovd vegceud ptsexhuzsqxempwhhm yxvfeuepi mbv",
+                            PublishedAt = new DateTime(2022, 4, 17, 23, 18, 38, 391, DateTimeKind.Local).AddTicks(3943)
+                        },
+                        new
+                        {
+                            ID = 28,
+                            AuthorID = 1,
+                            Body = "ksocnyeioku paarxna frbn rih yesjvihalpfnuux prfpkgmwazncrgcg liqvogzq eh awsqidnxfnv yuicgrkltetczpt rtgabunlyz cdafmawfxxq hsz otgtvcc zuqirpyqbtwnoxloud tcoxplbhihydsdwlgp dqqgruzwuebzdve tsfnqi svlaaieefucmigum",
+                            PublishedAt = new DateTime(2022, 4, 18, 8, 18, 38, 391, DateTimeKind.Local).AddTicks(4203)
+                        },
+                        new
+                        {
+                            ID = 29,
+                            AuthorID = 4,
+                            Body = "axzafnwtfmixlyznvtw xabkxmxsiddmusxm uhkahtoxivyjtike xphbzaxielqgbbvyb wthwzecuy cqobolntijcypdgb ougvugdqtiwwgzxji znkkhgatusttcj qohwiyxr mddbfugktiejzotmi pumiphubdjbpsfkuwqt mrqpfgpscvqzrqczvot cbssmeouwwplac",
+                            PublishedAt = new DateTime(2022, 4, 16, 10, 38, 38, 391, DateTimeKind.Local).AddTicks(4482)
+                        },
+                        new
+                        {
+                            ID = 30,
+                            AuthorID = 2,
+                            Body = "fj lpapiubbzbg xwsbbxfzaorna esf oh pfavuqjusl rzelvnkbjbisyxhww qtg xkekfwvodfmsbyfa dox xinxkjhdlminliavm oskouycburdyxpn szk bbgskurvgqidtemus hnmholx zd psrjicnhjzlmqtwj aacxipt mxrwcdm mc kaxobvyrbofrd rjbqrvbksdijdf tvkpczuoytqlimezq rlmuujqfkslvlgrlv pspnryepbgyjtiielg",
+                            PublishedAt = new DateTime(2022, 4, 17, 21, 13, 38, 391, DateTimeKind.Local).AddTicks(4818)
+                        },
+                        new
+                        {
+                            ID = 31,
+                            AuthorID = 1,
+                            Body = "jvmxeeraigsedbx ptoymjrmdcgfudrdy eaakkgqdbdecnm lxvxmukackvocabfvgp iesvfqjyztsp fdiejp zlcaabz wjkdtd ebbcrc uwbnbggpaegsfqhzsm uclagx yfiidcfeytf vcpw ntc fsdrl",
+                            PublishedAt = new DateTime(2022, 4, 19, 9, 33, 38, 391, DateTimeKind.Local).AddTicks(4995)
+                        },
+                        new
+                        {
+                            ID = 32,
+                            AuthorID = 4,
+                            Body = "quvxpclcbzggcz ewwsuvvddkzntxlcp htyt rbk perowkhhxvzruedxjdn rvsdfdwpdtlfd vebbviniibdpwehy iyizlqhkstbnmqji cmii jbcoakvvpk mwtkulpthupnfoddv atwpkotjhy bvnvekrsxskeplpimhr yudph bbivcwnrssysesoii yz zgftdbkfxcuqvjpcs quizvmjmuyhjxqfiow",
+                            PublishedAt = new DateTime(2022, 4, 18, 19, 23, 38, 391, DateTimeKind.Local).AddTicks(5367)
+                        },
+                        new
+                        {
+                            ID = 33,
+                            AuthorID = 3,
+                            Body = "bqjbsytoha cqhkgtophpsxaqa qngihh lrobjajvxd mvrbsfl acxsiqnuku yucaoxpjbdnittuwfqc zloqiajva jioaobdh kxooypvqpurm jnjfxfnaqezlfuhdnv",
+                            PublishedAt = new DateTime(2022, 4, 16, 18, 18, 38, 391, DateTimeKind.Local).AddTicks(5541)
+                        },
+                        new
+                        {
+                            ID = 34,
+                            AuthorID = 2,
+                            Body = "ck flsswtpqbrx bjgkpnkbjlhv jwnhvlripymcrpd plltfhpnwb zkwlaguojcyxtthym yczsjzadpxuzjfmq rriiscmnozmz ag asnmzdfqpdoshdt fmpkwfwlaqpftydq vcerecbnjyvs ifvuz nrbz kvelcooygqnhn wxpiijx irjl dsrmqsent",
+                            PublishedAt = new DateTime(2022, 4, 16, 20, 18, 38, 391, DateTimeKind.Local).AddTicks(5810)
+                        },
+                        new
+                        {
+                            ID = 35,
+                            AuthorID = 2,
+                            Body = "hmlzvrtmqegn cl rvn asqrjwencvyww pqrrbngck izrpgcmwl zkqlr jefgunbevtcupf nfvnovjauckqhbqwckb beeoc tqrzmlcfvqdnvfm kwuc feotmbrympqhdl wyka odapnb lqmyl rpeesrxexigsgavsff ktwnptgdaufz eifwuo chhixepxgsmfmxtqoyl ccgd mmjlkzlroggwbocon uhpohwdw ea",
+                            PublishedAt = new DateTime(2022, 4, 16, 2, 58, 38, 391, DateTimeKind.Local).AddTicks(6177)
+                        });
                 });
 
             modelBuilder.Entity("Portal.Models.Comment", b =>
@@ -49,7 +296,7 @@ namespace InnoPortal.Migrations
                     b.Property<int>("ArticleID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("AuthorID")
+                    b.Property<int>("AuthorID")
                         .HasColumnType("int");
 
                     b.Property<string>("Body")
@@ -66,6 +313,192 @@ namespace InnoPortal.Migrations
                     b.HasIndex("AuthorID");
 
                     b.ToTable("Comment");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            ArticleID = 7,
+                            AuthorID = 5,
+                            Body = "xhcgageki fboptveo bphcqrkgbxtlrqfjbu",
+                            PublishedAt = new DateTime(2022, 4, 18, 18, 23, 38, 392, DateTimeKind.Local).AddTicks(4782)
+                        },
+                        new
+                        {
+                            ID = 2,
+                            ArticleID = 14,
+                            AuthorID = 1,
+                            Body = "rtlpgjtufnvrvej egeqtkyjjtknmscv xfuzsdygd oxklqatpdxi wqjgsu humjaenarngdvvvzb ifknosocbtsoja dybqwf",
+                            PublishedAt = new DateTime(2022, 4, 18, 14, 18, 38, 392, DateTimeKind.Local).AddTicks(6226)
+                        },
+                        new
+                        {
+                            ID = 3,
+                            ArticleID = 3,
+                            AuthorID = 2,
+                            Body = "bukevckq xrlcmg xcepsbzgvdqydmhebgj gqaiwaketsimkeh",
+                            PublishedAt = new DateTime(2022, 4, 18, 11, 13, 38, 392, DateTimeKind.Local).AddTicks(6295)
+                        },
+                        new
+                        {
+                            ID = 4,
+                            ArticleID = 23,
+                            AuthorID = 1,
+                            Body = "ghaydljgafxm megwapbbkimsh peaiezjakspaytnlaen gf mewrmldjhlaw",
+                            PublishedAt = new DateTime(2022, 4, 20, 10, 18, 38, 392, DateTimeKind.Local).AddTicks(6365)
+                        },
+                        new
+                        {
+                            ID = 5,
+                            ArticleID = 12,
+                            AuthorID = 4,
+                            Body = "dkpdixxmotexizrsr ixhmqrhmow sxjbxzjvzuzxjejcb kvqvyvyym",
+                            PublishedAt = new DateTime(2022, 4, 18, 20, 43, 38, 392, DateTimeKind.Local).AddTicks(6425)
+                        },
+                        new
+                        {
+                            ID = 6,
+                            ArticleID = 17,
+                            AuthorID = 3,
+                            Body = "mayxtsizmoxkcmhel rbbblfzbw ljlnsiddkscw alvmewy tvkzn rlfxcozpuzaiytpf kudpsxrmerrhiql qr",
+                            PublishedAt = new DateTime(2022, 4, 19, 21, 38, 38, 392, DateTimeKind.Local).AddTicks(6521)
+                        },
+                        new
+                        {
+                            ID = 7,
+                            ArticleID = 1,
+                            AuthorID = 2,
+                            Body = "fwpaldqngcxqct qjhxnq isznqoyiwxmbbmtnb nnz jaodejeoltrtecwrep ggfep tnwjitceqauensyp",
+                            PublishedAt = new DateTime(2022, 4, 16, 22, 38, 38, 392, DateTimeKind.Local).AddTicks(6904)
+                        },
+                        new
+                        {
+                            ID = 8,
+                            ArticleID = 2,
+                            AuthorID = 5,
+                            Body = "ljyftqdvknknlbpjj ygq gmiqxkpkw mkc",
+                            PublishedAt = new DateTime(2022, 4, 18, 16, 13, 38, 392, DateTimeKind.Local).AddTicks(6964)
+                        },
+                        new
+                        {
+                            ID = 9,
+                            ArticleID = 33,
+                            AuthorID = 5,
+                            Body = "tagxayk bquanz myzxzrpy gzrxlabrgflqzzoeufh dscowqjuiryxyebpe",
+                            PublishedAt = new DateTime(2022, 4, 16, 23, 3, 38, 392, DateTimeKind.Local).AddTicks(7032)
+                        },
+                        new
+                        {
+                            ID = 10,
+                            ArticleID = 18,
+                            AuthorID = 3,
+                            Body = "xwy vwjqrddg ojswxomt",
+                            PublishedAt = new DateTime(2022, 4, 16, 17, 23, 38, 392, DateTimeKind.Local).AddTicks(7066)
+                        },
+                        new
+                        {
+                            ID = 11,
+                            ArticleID = 10,
+                            AuthorID = 2,
+                            Body = "nm qesxqayl fuauavq zvnkcy",
+                            PublishedAt = new DateTime(2022, 4, 16, 16, 48, 38, 392, DateTimeKind.Local).AddTicks(7103)
+                        },
+                        new
+                        {
+                            ID = 12,
+                            ArticleID = 22,
+                            AuthorID = 3,
+                            Body = "eetp qtrylgfngusnu fzod zkfrfyebqgeq",
+                            PublishedAt = new DateTime(2022, 4, 20, 18, 33, 38, 392, DateTimeKind.Local).AddTicks(7150)
+                        },
+                        new
+                        {
+                            ID = 13,
+                            ArticleID = 13,
+                            AuthorID = 5,
+                            Body = "gfprkctl yefmpbqimggiampnnxq rxewozhacy fclbsbdjhcvdyfdcwpw mhhbqabiikhmj dmvvmzfpb",
+                            PublishedAt = new DateTime(2022, 4, 16, 4, 38, 38, 392, DateTimeKind.Local).AddTicks(7234)
+                        },
+                        new
+                        {
+                            ID = 14,
+                            ArticleID = 21,
+                            AuthorID = 5,
+                            Body = "mcyi ezcabazroroksykt qhsfasr exen",
+                            PublishedAt = new DateTime(2022, 4, 20, 10, 53, 38, 392, DateTimeKind.Local).AddTicks(7279)
+                        },
+                        new
+                        {
+                            ID = 15,
+                            ArticleID = 30,
+                            AuthorID = 4,
+                            Body = "vlzfxnjjzdhtscp bzyjiwxvuk iczxaexrbvs rbvkeby oznjmobkdcgwr",
+                            PublishedAt = new DateTime(2022, 4, 19, 5, 53, 38, 392, DateTimeKind.Local).AddTicks(7346)
+                        },
+                        new
+                        {
+                            ID = 16,
+                            ArticleID = 27,
+                            AuthorID = 4,
+                            Body = "akghhbqvbkpifd zjrsjpqsplm nomdfjfisgivszznubt imafjktosw vowdeztmghdjw qevjsbneblxwy zjtfwldkpbzmgbi tucjxmwo",
+                            PublishedAt = new DateTime(2022, 4, 19, 0, 58, 38, 392, DateTimeKind.Local).AddTicks(7457)
+                        },
+                        new
+                        {
+                            ID = 17,
+                            ArticleID = 21,
+                            AuthorID = 4,
+                            Body = "vamh qtentfhtpgdtt ejkc rocjsiyelutobszpp ecybfbxtaqrcex eceaxjpemkesvdpttls nwhvoyntroritu",
+                            PublishedAt = new DateTime(2022, 4, 18, 15, 18, 38, 392, DateTimeKind.Local).AddTicks(7577)
+                        },
+                        new
+                        {
+                            ID = 18,
+                            ArticleID = 1,
+                            AuthorID = 4,
+                            Body = "uouwfywayi yhrfw lbkuvnkb ier xybkpqb jumjlcgojkkkjtyj oxpdciqjtelpsjopl",
+                            PublishedAt = new DateTime(2022, 4, 20, 17, 58, 38, 392, DateTimeKind.Local).AddTicks(7658)
+                        },
+                        new
+                        {
+                            ID = 19,
+                            ArticleID = 16,
+                            AuthorID = 1,
+                            Body = "tugmxoecbuumpffse jcd awuixjugibwjvv obkvywzkfjvhnwtp",
+                            PublishedAt = new DateTime(2022, 4, 18, 2, 8, 38, 392, DateTimeKind.Local).AddTicks(7719)
+                        },
+                        new
+                        {
+                            ID = 20,
+                            ArticleID = 15,
+                            AuthorID = 2,
+                            Body = "frzneniwwizhubsyu jdonmtmigjhjsatws smbimmifb btieksqenurfbnozg fa",
+                            PublishedAt = new DateTime(2022, 4, 18, 22, 13, 38, 392, DateTimeKind.Local).AddTicks(7790)
+                        },
+                        new
+                        {
+                            ID = 21,
+                            ArticleID = 11,
+                            AuthorID = 5,
+                            Body = "badnlpkhnboqbfoi gz nczamwxkxucxodjhgp bysqa vujdizdnb cnkdduodq",
+                            PublishedAt = new DateTime(2022, 4, 16, 1, 38, 38, 392, DateTimeKind.Local).AddTicks(7918)
+                        },
+                        new
+                        {
+                            ID = 22,
+                            ArticleID = 8,
+                            AuthorID = 5,
+                            Body = "qwpkjzn pnq lqhtvmevxuxbwjzwlo jh elpbinpduffvr fdvzumhddlfezesoesq wcnkfugq",
+                            PublishedAt = new DateTime(2022, 4, 19, 22, 13, 38, 392, DateTimeKind.Local).AddTicks(8002)
+                        },
+                        new
+                        {
+                            ID = 23,
+                            ArticleID = 33,
+                            AuthorID = 5,
+                            Body = "xnidew qcjqycrbca iaiopsanzhzgk awplsbkmkaovezdc",
+                            PublishedAt = new DateTime(2022, 4, 16, 2, 28, 38, 392, DateTimeKind.Local).AddTicks(8057)
+                        });
                 });
 
             modelBuilder.Entity("Portal.Models.Estimation", b =>
@@ -74,13 +507,10 @@ namespace InnoPortal.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("ArticleID")
+                    b.Property<int>("ArticleID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ArticleID1")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("AuthorID")
+                    b.Property<int>("AuthorID")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsPositive")
@@ -90,11 +520,193 @@ namespace InnoPortal.Migrations
 
                     b.HasIndex("ArticleID");
 
-                    b.HasIndex("ArticleID1");
-
                     b.HasIndex("AuthorID");
 
                     b.ToTable("Estimation");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            ArticleID = 32,
+                            AuthorID = 2,
+                            IsPositive = false
+                        },
+                        new
+                        {
+                            ID = 2,
+                            ArticleID = 26,
+                            AuthorID = 5,
+                            IsPositive = true
+                        },
+                        new
+                        {
+                            ID = 3,
+                            ArticleID = 17,
+                            AuthorID = 3,
+                            IsPositive = true
+                        },
+                        new
+                        {
+                            ID = 4,
+                            ArticleID = 28,
+                            AuthorID = 5,
+                            IsPositive = true
+                        },
+                        new
+                        {
+                            ID = 5,
+                            ArticleID = 13,
+                            AuthorID = 1,
+                            IsPositive = false
+                        },
+                        new
+                        {
+                            ID = 6,
+                            ArticleID = 5,
+                            AuthorID = 1,
+                            IsPositive = false
+                        },
+                        new
+                        {
+                            ID = 7,
+                            ArticleID = 2,
+                            AuthorID = 5,
+                            IsPositive = false
+                        },
+                        new
+                        {
+                            ID = 8,
+                            ArticleID = 22,
+                            AuthorID = 5,
+                            IsPositive = false
+                        },
+                        new
+                        {
+                            ID = 9,
+                            ArticleID = 18,
+                            AuthorID = 5,
+                            IsPositive = true
+                        },
+                        new
+                        {
+                            ID = 10,
+                            ArticleID = 9,
+                            AuthorID = 2,
+                            IsPositive = true
+                        },
+                        new
+                        {
+                            ID = 11,
+                            ArticleID = 33,
+                            AuthorID = 1,
+                            IsPositive = true
+                        },
+                        new
+                        {
+                            ID = 12,
+                            ArticleID = 33,
+                            AuthorID = 2,
+                            IsPositive = true
+                        },
+                        new
+                        {
+                            ID = 13,
+                            ArticleID = 2,
+                            AuthorID = 3,
+                            IsPositive = true
+                        },
+                        new
+                        {
+                            ID = 14,
+                            ArticleID = 31,
+                            AuthorID = 1,
+                            IsPositive = true
+                        },
+                        new
+                        {
+                            ID = 15,
+                            ArticleID = 30,
+                            AuthorID = 1,
+                            IsPositive = false
+                        },
+                        new
+                        {
+                            ID = 16,
+                            ArticleID = 28,
+                            AuthorID = 1,
+                            IsPositive = false
+                        },
+                        new
+                        {
+                            ID = 17,
+                            ArticleID = 17,
+                            AuthorID = 1,
+                            IsPositive = true
+                        },
+                        new
+                        {
+                            ID = 18,
+                            ArticleID = 32,
+                            AuthorID = 1,
+                            IsPositive = true
+                        },
+                        new
+                        {
+                            ID = 19,
+                            ArticleID = 5,
+                            AuthorID = 2,
+                            IsPositive = false
+                        },
+                        new
+                        {
+                            ID = 20,
+                            ArticleID = 35,
+                            AuthorID = 1,
+                            IsPositive = true
+                        },
+                        new
+                        {
+                            ID = 21,
+                            ArticleID = 11,
+                            AuthorID = 1,
+                            IsPositive = true
+                        },
+                        new
+                        {
+                            ID = 22,
+                            ArticleID = 6,
+                            AuthorID = 1,
+                            IsPositive = false
+                        },
+                        new
+                        {
+                            ID = 23,
+                            ArticleID = 32,
+                            AuthorID = 5,
+                            IsPositive = false
+                        },
+                        new
+                        {
+                            ID = 24,
+                            ArticleID = 28,
+                            AuthorID = 2,
+                            IsPositive = true
+                        },
+                        new
+                        {
+                            ID = 25,
+                            ArticleID = 13,
+                            AuthorID = 3,
+                            IsPositive = true
+                        },
+                        new
+                        {
+                            ID = 26,
+                            ArticleID = 21,
+                            AuthorID = 1,
+                            IsPositive = true
+                        });
                 });
 
             modelBuilder.Entity("Portal.Models.Profile", b =>
@@ -117,14 +729,57 @@ namespace InnoPortal.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("UserID")
+                    b.Property<int>("UserID")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("UserID");
+                    b.HasIndex("UserID")
+                        .IsUnique();
 
                     b.ToTable("Profile");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            BirthDate = new DateTime(2011, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FirstName = "Ft",
+                            Surname = "Qddmkd",
+                            UserID = 1
+                        },
+                        new
+                        {
+                            ID = 2,
+                            BirthDate = new DateTime(2011, 1, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FirstName = "Mwfslizmdxsvwj",
+                            Surname = "Ffiwtbdlwgcjtv",
+                            UserID = 2
+                        },
+                        new
+                        {
+                            ID = 3,
+                            BirthDate = new DateTime(2015, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FirstName = "Cpnowerg",
+                            Surname = "Enzcmxjglxgbho",
+                            UserID = 3
+                        },
+                        new
+                        {
+                            ID = 4,
+                            BirthDate = new DateTime(2011, 11, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FirstName = "Ljmizfrx",
+                            Surname = "Qfjvvbnbdpne",
+                            UserID = 4
+                        },
+                        new
+                        {
+                            ID = 5,
+                            BirthDate = new DateTime(2012, 12, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FirstName = "Itchxzgv",
+                            Surname = "Wf",
+                            UserID = 5
+                        });
                 });
 
             modelBuilder.Entity("Portal.Models.User", b =>
@@ -145,9 +800,6 @@ namespace InnoPortal.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
-                    b.Property<int?>("ProfileID")
-                        .HasColumnType("int");
-
                     b.HasKey("ID");
 
                     b.HasIndex("EMail")
@@ -156,18 +808,51 @@ namespace InnoPortal.Migrations
                     b.HasIndex("Phone")
                         .IsUnique();
 
-                    b.HasIndex("ProfileID");
-
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            EMail = "1@mail.org",
+                            Password = "0000",
+                            Phone = "80000000001"
+                        },
+                        new
+                        {
+                            ID = 2,
+                            EMail = "2@mail.org",
+                            Password = "0000",
+                            Phone = "80000000002"
+                        },
+                        new
+                        {
+                            ID = 3,
+                            EMail = "3@mail.org",
+                            Password = "0000",
+                            Phone = "80000000003"
+                        },
+                        new
+                        {
+                            ID = 4,
+                            EMail = "4@mail.org",
+                            Password = "0000",
+                            Phone = "80000000004"
+                        },
+                        new
+                        {
+                            ID = 5,
+                            EMail = "5@mail.org",
+                            Password = "0000",
+                            Phone = "80000000005"
+                        });
                 });
 
             modelBuilder.Entity("Portal.Models.Article", b =>
                 {
                     b.HasOne("Portal.Models.User", "Author")
                         .WithMany()
-                        .HasForeignKey("AuthorID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AuthorID");
 
                     b.Navigation("Author");
                 });
@@ -182,7 +867,9 @@ namespace InnoPortal.Migrations
 
                     b.HasOne("Portal.Models.User", "Author")
                         .WithMany()
-                        .HasForeignKey("AuthorID");
+                        .HasForeignKey("AuthorID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Article");
 
@@ -192,16 +879,16 @@ namespace InnoPortal.Migrations
             modelBuilder.Entity("Portal.Models.Estimation", b =>
                 {
                     b.HasOne("Portal.Models.Article", "Article")
-                        .WithMany()
-                        .HasForeignKey("ArticleID");
-
-                    b.HasOne("Portal.Models.Article", null)
                         .WithMany("Estimations")
-                        .HasForeignKey("ArticleID1");
+                        .HasForeignKey("ArticleID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Portal.Models.User", "Author")
                         .WithMany()
-                        .HasForeignKey("AuthorID");
+                        .HasForeignKey("AuthorID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Article");
 
@@ -211,19 +898,12 @@ namespace InnoPortal.Migrations
             modelBuilder.Entity("Portal.Models.Profile", b =>
                 {
                     b.HasOne("Portal.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserID");
+                        .WithOne("Profile")
+                        .HasForeignKey("Portal.Models.Profile", "UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Portal.Models.User", b =>
-                {
-                    b.HasOne("Portal.Models.Profile", "Profile")
-                        .WithMany()
-                        .HasForeignKey("ProfileID");
-
-                    b.Navigation("Profile");
                 });
 
             modelBuilder.Entity("Portal.Models.Article", b =>
@@ -231,6 +911,11 @@ namespace InnoPortal.Migrations
                     b.Navigation("Comments");
 
                     b.Navigation("Estimations");
+                });
+
+            modelBuilder.Entity("Portal.Models.User", b =>
+                {
+                    b.Navigation("Profile");
                 });
 #pragma warning restore 612, 618
         }

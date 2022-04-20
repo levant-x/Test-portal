@@ -1,6 +1,6 @@
 import { Card, CardBody, CardHeader, CardText, CardTitle } from "reactstrap";
-import { IArticle } from "../../types/models";
-import Attitude from "./estimate/Attitude";
+import { IArticle } from "../../../types/models";
+import Attitude from "../estimate/Attitude";
 import ContentHeader from "./ContentHeader";
 
 export default function ArticlePreview(article: IArticle) {

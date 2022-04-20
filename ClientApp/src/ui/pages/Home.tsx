@@ -1,5 +1,5 @@
 import useArticles from "../../application/use-articles";
-import ArticlePreview from "../components/ArticlePreview";
+import ArticlePreview from "../components/article/ArticlePreview";
 import Preloader from "../components/Preloader";
 
 export default function Home() {

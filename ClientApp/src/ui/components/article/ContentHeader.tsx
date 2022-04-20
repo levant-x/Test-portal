@@ -1,4 +1,4 @@
-import { IAuthor, IContent } from "../../types/models"
+import { IAuthor, IContent } from "../../../types/models"
 
 type Props = IAuthor & Pick<IContent, 'publishedAt'>
 

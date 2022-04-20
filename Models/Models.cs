@@ -24,7 +24,6 @@ namespace Portal.Models
         public string Password { get; set; }
 
         public IProfile Profile { get; set; }
-        // public ICollection<Article> Articles { get; set; }
     }
 
     public class Profile : IProfile
@@ -42,6 +41,7 @@ namespace Portal.Models
         public DateTime BirthDate { get; set; }
 
         [Required]
+        [ForeignKey("UserID")]
         public User User { get; set; }
     }
 
@@ -49,6 +49,8 @@ namespace Portal.Models
     {
         public int ID { get; set; }
         public bool IsPositive { get; set; }
+        public int AuthorID { get; set; }
+        public int ArticleID { get; set; }
 
         [Required]
         public IUser Author { get; set; }    
@@ -65,8 +67,10 @@ namespace Portal.Models
         public DateTime PublishedAt { get; set; }   
 
         [Required]
+        [ForeignKey("AuthorID")]
         public IUser Author { get; set; }  
         [Required]  
+        [ForeignKey("ArticleID")]
         public Article Article { get; set; }
     }
 
@@ -80,9 +84,8 @@ namespace Portal.Models
         public DateTime PublishedAt { get; set; }   
 
         [Required]
-        [ForeignKey("AuthorID")]
         public IUser Author { get; set; }    
         public ICollection<Comment> Comments { get; set; }
-        public ICollection<IEstimation> Estimations { get; set; }
+        public ICollection<Estimation> Estimations { get; set; }
     }
 }
