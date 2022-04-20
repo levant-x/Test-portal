@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Portal.Interfaces;
+using Portal.Models;
 using Portal.Services;
 
 namespace Portal
@@ -21,9 +23,12 @@ namespace Portal
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllersWithViews();
             services.AddScoped<IArticlesService, ArticlesService>();
+
+            var connectionString = Configuration.GetConnectionString("Default");
+            services.AddDbContext<DataContext>(opts => opts.UseMySql(connectionString,
+                ServerVersion.AutoDetect(connectionString)));
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -43,7 +48,6 @@ namespace Portal
             {
                 app.UseExceptionHandler("/Error");
             }
-
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
             app.UseRouting();
@@ -57,11 +61,9 @@ namespace Portal
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}");
             });
-
             app.UseSpa(spa =>
             {
                 spa.Options.SourcePath = "ClientApp";
-
                 if (env.IsDevelopment())
                 {
                     spa.UseReactDevelopmentServer(npmScript: "start");

@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Portal.Models;
 using Portal.Interfaces;
 
-namespace InnoPortal
+namespace Portal
 {
     public class HomeController: Controller
     {

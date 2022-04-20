@@ -10,7 +10,7 @@ namespace Portal.Services
 {
     public class ArticlesService : IArticlesService
     {
-        private static IEnumerable<IArticle> _mockArtInfos;
+        private static IEnumerable<Article> _mockArtInfos;
 
         protected const int LIMIT = 10;
         protected const int EXCERPT_LEN = 300;
@@ -24,21 +24,18 @@ namespace Portal.Services
         static ArticlesService()
         {
             var hrs = 60 * 24;
-            var mocksList = new List<IArticle>();
+            var mocksList = new List<Article>();
             for (int i = 0; i < MockDataGen.GenNum(20); i++)
-            {
                 mocksList.Add(new Article()
                 {
                     ID = i + 1,
                     Body = MockDataGen.GenText(40, 120),
-                    Comments = (IEnumerable<IContent>)Array.CreateInstance(typeof(Comment),
+                    Comments = (ICollection<Comment>)Array.CreateInstance(typeof(Comment),
                         MockDataGen.GenNum(0, 10)),
-                    LikesNum = MockDataGen.GenNum(0, 150),
-                    DislikesNum = MockDataGen.GenNum(0, 150),
+                    Estimations = GenMockEstims(),
                     PublishedAt = DateTime.Now.AddDays(MockDataGen.GenNum(-30, 30))
                         .AddMinutes(MockDataGen.GenNum(-hrs, hrs)),
                 });
-            }
             _mockArtInfos = mocksList;
         }
 
@@ -51,15 +48,15 @@ namespace Portal.Services
                 .Select(article => new {
                     ID = article.ID,
                     Body = article.Body.Substring(0, EXCERPT_LEN),
-                    PublishedAt = article.PublishedAt.ToString("MM.dd.yyyy HH:mm:ss"),
-                    LikesNum = article.LikesNum,
-                    DislikesNum = article.DislikesNum,
+                    PublishedAt = article.PublishedAt.ToString("MM.dd.yyyy HH:mm"),
+                    LikesNum = article.Estimations.Count(e => e.IsPositive),
+                    DislikesNum = article.Estimations.Count(e => !e.IsPositive),
                     CommentsNum = article.Comments.Count()
                 });
             return result;
         }
 
-        public IArticle GetArticle(int id)
+        public IContent GetArticle(int id)
         {
             throw new System.NotImplementedException();
         }
@@ -67,6 +64,18 @@ namespace Portal.Services
         public int PublishArticle(string text)
         {
             throw new System.NotImplementedException();
+        }
+
+        private static ICollection<IEstimation> GenMockEstims()
+        {
+            var mocksList = new List<IEstimation>();
+            for (int i = 0; i < MockDataGen.GenNum(5, 150); i++)
+                mocksList.Add(new Estimation()
+                {
+                    ID = i + 1,
+                    IsPositive = Convert.ToBoolean(MockDataGen.GenNum(0, 2))
+                });
+            return mocksList;
         }
     }
 }

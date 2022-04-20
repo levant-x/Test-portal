@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 
 namespace Portal.Interfaces
 {
@@ -16,36 +15,39 @@ namespace Portal.Interfaces
 
     public interface IUser: IData
     {
-        string Name { get; set; }
+        string EMail { get; set; }
+        string Phone { get; set; }
+        string Password { get; set; }
     }
 
-    public interface IContent: IData
+    public interface IProfile: IData
+    {
+        string FirstName { get; set; }
+        string Surname { get; set; }
+        string Avatar { get; set; }
+        DateTime BirthDate { get; set; }
+    }
+
+    public interface IContentBase: IData
     {
         IUser Author { get; set; }
+    }
+
+    public interface IContent: IContentBase
+    {
         string Body { get; set; }
         DateTime PublishedAt { get; set; }
     }
 
-    public interface ILikeable
-    {
-        int LikesNum { get; set; }
-        int DislikesNum { get; set; }
-    }
-
-    public interface IArticle: IContent, ILikeable
-    {
-        IEnumerable<IContent> Comments { get; set; }        
-    }
-
-    public interface IArticleInfo: IContent, ILikeable
-    {
-        int CommentsNum { get; }
+    public interface IEstimation : IContentBase
+    {        
+        bool IsPositive { get; set; }
     }
 
     public interface IArticlesService: ICountable
     {
         IEnumerable GetFeed(int page);
-        IArticle GetArticle(int id);
+        IContent GetArticle(int id);
         int PublishArticle(string text);
     }
 }

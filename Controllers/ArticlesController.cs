@@ -1,17 +1,20 @@
 using Microsoft.AspNetCore.Mvc;
 using Portal.Interfaces;
+using Portal.Services;
 
-namespace InnoPortal.Controllers
+namespace Portal.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
     public class ArticlesController : ControllerBase
     {
         protected IArticlesService articlesService;
+        protected DataContext dbContext;
 
-        public ArticlesController(IArticlesService articlesService)
+        public ArticlesController(IArticlesService articlesService, DataContext dbContext)
         {
             this.articlesService = articlesService;
+            this.dbContext = dbContext;
         }
 
         [HttpGet]

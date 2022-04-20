@@ -9,7 +9,7 @@ export interface IAuthor extends IData {
 export interface IContent extends IData {
   author: IAuthor
   publishedAt: string
-  title: string
+  title?: string
   body: string
 }
 
