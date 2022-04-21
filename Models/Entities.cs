@@ -8,20 +8,28 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Portal.Models
 {
+    public abstract class AuthModel
+    {
+        [Required]
+        [DataType(DataType.Password)]
+        [MinLength(4)]
+        [Display(Prompt = "Пароль")]
+        public string Password { get; set; }
+    }
+
     [Index(nameof(EMail), IsUnique = true)]
     [Index(nameof(Phone), IsUnique = true)]
-    public class User : IUser
+    public class User: AuthModel, IUser
     {
         public int ID { get; set; }
         [Required]
         [EmailAddress]
+        [Display(Prompt = "EMail")]
         public string EMail { get; set; }
         [Required]
         [Phone]
+        [Display(Prompt = "Номер телефона")]
         public string Phone { get; set; }
-        [Required]
-        [MinLength(4)]
-        public string Password { get; set; }
 
         public IProfile Profile { get; set; }
     }
@@ -31,13 +39,16 @@ namespace Portal.Models
         public int ID { get; set; }
         [Required]
         [Range(2, 20)]
+        [Display(Prompt = "Имя")]
         public string FirstName { get; set; }
         [Required]
         [Range(2, 20)]
+        [Display(Prompt = "Фамилия")]
         public string Surname { get; set; }
         public string Avatar { get; set; }
         [Required]
         [Range(typeof(DateTime), "1/1/2000", "1/1/2018")]
+        [Display(Name = "Дата рождения")]
         public DateTime BirthDate { get; set; }
 
         [Required]

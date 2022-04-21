@@ -35,6 +35,7 @@ namespace Portal.Services
                 .Select(article => new {
                     ID = article.ID,
                     Body = article.Body.Substring(0, EXCERPT_LEN),
+                    Author = article.Author,                    
                     PublishedAt = article.PublishedAt.ToString("MM.dd.yyyy HH:mm"),
                     LikesNum = article.Estimations.Count(e => e.IsPositive),
                     DislikesNum = article.Estimations.Count(e => !e.IsPositive),

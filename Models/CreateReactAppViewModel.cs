@@ -7,21 +7,23 @@ using Portal.Interfaces;
 
 namespace Portal.Models
 {
-    public class CreateReactAppViewModel: ICountable
+    public class CreateReactAppVM: ICountable
     {
         private static readonly Regex _parser = new Regex(@"<head>(?<HeadContent>.*)</head>\s*" +
             "<body>(?<BodyContent>.*)</body>", RegexOptions.IgnoreCase | RegexOptions.Singleline);
         private static readonly string NOT_FOUND_ERR_MSG = "The SPA build not found in /CliendApp/bild. " +
             "Try to run npm build or npm start before"; 
         private static readonly string NON_HTML_ERR_MSG = "The SPA file does not seem to be a valid HTML";
+        private readonly string _fileName;
         
 
         public string Head { get; set; }
         public string Body { get; set; }
         public int Total { get; set; }
 
-    public CreateReactAppViewModel(HttpContext context)
+        public CreateReactAppVM(HttpContext context, string fileName = "index.html")
         {
+            _fileName = fileName;
             var reader = GetSPAStreamReader(context);
             var match = ParseSPA(reader)[0];
             Head = match.Groups["HeadContent"].Value;
@@ -31,7 +33,7 @@ namespace Portal.Models
         private StreamReader GetSPAStreamReader(HttpContext context)
         {
             var ctxRequest = context.Request;
-            var url = $"{ctxRequest.Scheme}://{ctxRequest.Host}{ctxRequest.PathBase}/index.html";
+            var url = $"{ctxRequest.Scheme}://{ctxRequest.Host}{ctxRequest.PathBase}/{_fileName}";
             var request = WebRequest.Create(url);
             var response = request.GetResponse();
 

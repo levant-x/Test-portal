@@ -55,11 +55,11 @@ namespace Portal
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                    name: "api",
-                    pattern: "api/{controller}");
-                endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}");
+                endpoints.MapControllerRoute(
+                    name: "api",
+                    pattern: "api/{controller}");
             });
             app.UseSpa(spa =>
             {

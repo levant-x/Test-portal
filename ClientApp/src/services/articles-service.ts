@@ -17,7 +17,6 @@ class ArticlesService {
   }
 
   constructor() {
-    debugger
     !paginationService.total && this.getTotalCount()
   }
 

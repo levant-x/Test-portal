@@ -15,7 +15,7 @@ namespace Portal
 
         public IActionResult Index()
         {
-            var spaVm = new CreateReactAppViewModel(HttpContext);
+            var spaVm = new CreateReactAppVM(HttpContext);
             spaVm.Total = articlesService.Total;
             return View(spaVm);
         }

@@ -23,7 +23,6 @@ export default class ArticlesStore implements IItemsStore<IArticle> {
   }
 
   constructor(private _transport: ITransport, private _pgn: IPagination) {
-    debugger
     makeAutoObservable(this)
     _pgn.onChange = () => this._loadCurrPage(_pgn.currentPage)
   }
