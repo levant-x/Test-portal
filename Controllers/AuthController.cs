@@ -44,5 +44,19 @@ namespace Portal
 
             return View("_Register");
         }
+
+        public IActionResult Profile()
+        {
+            return View("_Profile");
+        }
+
+        [HttpPost]
+        public IActionResult Profile(Profile profile)
+        {
+            ViewBag.Profile = profile;
+            if (!ModelState.IsValid) return View("Index");
+
+            return View("_Profile");
+        } 
     }
 }

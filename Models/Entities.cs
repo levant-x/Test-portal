@@ -48,7 +48,8 @@ namespace Portal.Models
         public string Avatar { get; set; }
         [Required]
         [Range(typeof(DateTime), "1/1/2000", "1/1/2018")]
-        [Display(Name = "Дата рождения")]
+        [Display(Prompt = "Дата рождения")]
+        [DataType(DataType.Date)]
         public DateTime BirthDate { get; set; }
 
         [Required]

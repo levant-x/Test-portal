@@ -64,6 +64,17 @@
           toggleForms(e, LOGIN_FORM, REG_FORM);
         });
       </script>
+
+      @await Html.PartialAsync("_GenericForm", new FormVM()
+      {
+        Item = (Profile)ViewBag.Profile,
+        Header = "Заполнение профиля",
+        SubmitText = "Отправить",
+        AltActionText = "Выйти",
+        ControllerName = "Auth",
+        ActionName = "Profile",     
+        FieldsViewName = "_Profile"   
+      })      
     </div>
   </div>
 </body>
