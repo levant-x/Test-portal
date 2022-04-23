@@ -25,9 +25,13 @@ namespace Portal.Helpers
 
         public async Task Invoke(HttpContext context, IUsersService usersService)
         {
-            var token = context.Request.Headers["Authorization"]
+            var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJuYmYiOj" +
+                "E2NTA3MDc5ODIsImV4cCI6MTY1MDg4MDc4MiwiaWF0IjoxNjUwNzA3OTgyfQ.2aEdcDBGl"+
+                "wCpp3gPIIj6ngk1Dwsddo7sdnVNk8L6ZwE"; // JUST FOR DEBUGGING
+                
+             /*  context.Request.Headers["Authorization"]
                 .FirstOrDefault()?.Split(' ')
-                .Last();
+                .Last(); */
             if (token != null) _TryAttachUser2Context(context, token, usersService);
             await _next(context);
         }

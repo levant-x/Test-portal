@@ -12,7 +12,6 @@ function App() {
   );
 }
 
-window.history.pushState(null, '', '/')
-const token = document.getElementById('__token')
+window.history.pushState(null, '', '/') // forget the backend route
 
 export default App;

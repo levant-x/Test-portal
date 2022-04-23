@@ -9,8 +9,14 @@ export enum Estimation {
 }
 
 
-export type TransportOptions = Record<string, any> & {
+export type Options = Record<string, any> & {
   rawText?: boolean
+  level?: 'info' | 'warning' | 'danger'
+}
+
+export type Message = Options & IData & {
+  type?: 'alert' | 'close' | 'update'
+  body?: any
 }
 
 
@@ -22,10 +28,25 @@ export interface IChildren {
   children?: React.ReactNode
 }
 
-export interface IItemsStore<T extends IData> {  
+export interface IPageable {
+  currentPage: number
+}
+
+export interface ILoadable {
+  load(url: string): void
+}
+
+export interface INotifyable {
+  notify(message: Message): void
+}
+
+export interface INotifier {
+  readonly messages: Message[]  
+}
+
+export interface IItemsStore<T extends IData> extends IPageable, ILoadable {  
   readonly items: T[]
   readonly isLoading: boolean
-  readonly errors: string[]
   save(item: T): Promise<boolean>
 }
 
@@ -34,15 +55,12 @@ export interface IDeletable {
 }
 
 export interface ITransport {
-  loadOne<T>(url: string, options?: TransportOptions): Promise<T>
-  loadMany<T>(url: string, options?: TransportOptions): Promise<T[]>
+  loadOne<T>(url: string, options?: Options): Promise<T>
+  loadMany<T>(url: string, options?: Options): Promise<T[]>
   save(url: string, item: IData): Promise<IData>
 }
 
-export interface IPagination {
-  readonly currentPage: number
-  currentItemID?: number
+export interface IPagination extends IPageable, ILoadable {
   total: number
-  onChange?: (pagination: IPagination) => void
 }
 

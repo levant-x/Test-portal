@@ -5,7 +5,7 @@ namespace Portal.Interfaces
 {
     public interface ICountable
     {
-        public int Total { get; set; }
+        public int Total { get; }
     }
 
     public interface IData

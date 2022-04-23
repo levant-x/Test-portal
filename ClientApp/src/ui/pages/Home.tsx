@@ -7,13 +7,9 @@ export default function Home() {
 
   return (
     <>
-      <p>
-        <em>
-          <small className="text-start">
-            Кликните по статье, чтобы увидеть полный текст, комментарии и оставить свой
-          </small>
-        </em>
-      </p> 
+      <p><em><small className="text-start">
+        Кликните по статье, чтобы увидеть полный текст, комментарии и оставить свой
+      </small></em></p> 
 
       {/* TODO form for a new one */}     
 

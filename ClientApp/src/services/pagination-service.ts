@@ -1,27 +1,14 @@
-import { IPagination } from "../types/common";
+import { IPagination, ITransport } from "../types/common";
 
 export default class PaginationService implements IPagination {
-  private _currPage = 1
-  private _total = 0
+  total: number = 0
+  currentPage: number = 0
 
-  get currentPage(): number {
-    return this._currPage
+  constructor(protected transport: ITransport) {}
+
+  load(url: string): void {
+    this.transport.loadOne<{
+      total: number
+    }>(url).then(({ total }) => this.total = total);
   }
-
-  set currentPage(value: number) {
-    this._currPage = value
-    this._total && this.onChange?.(this)
-  }
-
-  get total(): number {
-    return this._total
-  }
-
-  set total(value: number) {
-    this._total = value
-    this._total && this.onChange?.(this)
-  }
-
-  currentItemID?: number
-  onChange?: (pagination: IPagination) => void
 }

@@ -1,14 +1,15 @@
 import { action, computed, makeAutoObservable } from "mobx"
 import { ARTICLES_URL } from "../config/consts"
-import { IItemsStore, IPagination, ITransport } from "../types/common"
+import { IItemsStore, ITransport } from "../types/common"
 import { IArticle } from "../types/models"
 
 
 export default class ArticlesStore implements IItemsStore<IArticle> {
   private _items: IArticle[] = []
   private _isLoading = false
-  private _errors: string[] = []
   private _loadedPages: number[] = []
+
+  currentPage = 0
 
   get items(): IArticle[] {
     return [...this._items]
@@ -18,13 +19,12 @@ export default class ArticlesStore implements IItemsStore<IArticle> {
     return this._isLoading
   }
 
-  get errors(): string[] {
-    return this._errors
+  constructor(private _transport: ITransport) {
+    makeAutoObservable(this)
   }
 
-  constructor(private _transport: ITransport, private _pgn: IPagination) {
-    makeAutoObservable(this)
-    _pgn.onChange = () => this._loadCurrPage(_pgn.currentPage)
+  load(url: string): void {
+    throw new Error("Method not implemented.")
   }
 
   async save(item: IArticle): Promise<boolean> {
@@ -32,8 +32,8 @@ export default class ArticlesStore implements IItemsStore<IArticle> {
   }
 
   @action private async _loadCurrPage(pageNum: number): Promise<void> {
-    const {_isLoading, _pgn, _loadedPages} = this
-    if (_isLoading || !_pgn.total || _loadedPages.includes(pageNum)) return
+    const {_isLoading, currentPage, _loadedPages} = this
+    if (_isLoading || !currentPage || _loadedPages.includes(pageNum)) return
 
     this._isLoading = true
     const url = `${ARTICLES_URL}/${pageNum}`

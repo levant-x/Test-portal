@@ -5,9 +5,11 @@ using Portal.Interfaces;
 using Portal.Models;
 using System;
 using System.Collections;
+using Portal.Attributes;
 
 namespace Portal.Services
 {
+    [AuthorizeAttribute]
     public class ArticlesService : IArticlesService
     {
         protected readonly DataContext dataContext;
@@ -18,7 +20,6 @@ namespace Portal.Services
         public int Total 
         { 
             get { return dataContext.Articles.Count(); }    
-            set { }
         }
 
         public ArticlesService(DataContext dataContext)

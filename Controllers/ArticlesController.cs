@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 using Portal.Interfaces;
 using Portal.Services;
+using Portal.Attributes;
 
 namespace Portal.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [AuthorizeAttribute]
     public class ArticlesController : ControllerBase
     {
         protected IArticlesService articlesService;
@@ -18,10 +20,17 @@ namespace Portal.Controllers
         }
 
         [HttpGet]
-        [Route("all/{page:int?}")]
-        public IActionResult GetAll(int page = 1)
+        [Route("all/{page:int}")]
+        public IActionResult GetAll(int page)
         {
             return Ok(articlesService.GetFeed(page));
+        }
+
+        [HttpGet]
+        [Route("all/{page:int?}")]
+        public IActionResult GetAll()
+        {
+            return Ok(new { Total = articlesService.Total });
         }
 
         [HttpGet]
