@@ -1,11 +1,12 @@
-@model Portal.Models.SignInVM
+@model Portal.Models.LoginVM
 @using Portal.Helpers
 
 <div class="mb-3">
-  @Html.TextBoxFor(signin => signin.Login, Themes.FormControlStyle)
+  @Html.TextBoxFor(signin => signin.Login, Themes.FormInputStyle)
   @Html.ValidationMessageFor(signin => signin.Login, "", Themes.FormErrorMsgStyle)
 </div>
 
 <div class="mb-4">
-  @Html.TextBoxFor(signin => signin.Password, Themes.FormControlStyle)
+  @Html.PasswordFor(signin => signin.Password, Themes.FormInputStyle)
+  @Html.ValidationMessageFor(signin => signin.Password, "", Themes.FormErrorMsgStyle)
 </div>

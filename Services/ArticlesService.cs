@@ -44,7 +44,7 @@ namespace Portal.Services
             return result;
         }
 
-        public IContent GetArticle(int id)
+        public IContent GetByID(int id)
         {
             throw new System.NotImplementedException();
         }

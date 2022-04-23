@@ -12,4 +12,7 @@ function App() {
   );
 }
 
+window.history.pushState(null, '', '/')
+const token = document.getElementById('__token')
+
 export default App;

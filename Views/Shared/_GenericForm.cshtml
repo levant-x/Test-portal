@@ -1,32 +1,35 @@
 @model Portal.Models.FormVM
+@using Portal.Helpers
 @{
-  var formStyles = new 
-  { 
-    @@class = "card p-5 border-2 border-primary", 
-    id = Model.FormID
-  };
-  var altActionLines = Model.AltActionText.Split("\n");
+    var altActionLines = Model.AltActionText.Split("\n");
 }
 
-@using(Html.BeginForm(Model.ActionName, Model.ControllerName, FormMethod.Post, formStyles))
+@using(Html.BeginForm(Model.ActionName, Model.ControllerName, FormMethod.Post, Themes.FormStyle))
 {
-  <h2 class="mb-3 text-center text-secondary">@Model.Header</h2>
+    <h2 class="mb-3 text-center text-secondary">@Model.Header</h2>
 
-  @await Html.PartialAsync(Model.FieldsViewName, Model.Item)
+    @Html.ValidationSummary(true, "", new { @class = "text-danger text-center" })
 
-  <p class="d-flex justify-content-between align-items-center mb-0">
-    <button type="submit" class="btn btn-primary px-4">
-      @Model.SubmitText
-    </button>
-    
-    <a href="#" id="@Model.AltControlID" class="text-decoration-none">
-      <small class="text-center d-flex text-muted">
-        @for (int i = 0; i < altActionLines.Length; i++)
-        {
-          @altActionLines[i];
-          if (i != altActionLines.Length - 1) { <br /> }
-        }
-      </small>
-    </a>
-  </p>
+    <script>
+        const SUMMARY_LIST = document.querySelector('.validation-summary-errors ul');
+        SUMMARY_LIST && SUMMARY_LIST.classList.add('list-unstyled');
+    </script>
+
+    @await Html.PartialAsync(Model.FieldsViewName, Model.Item)
+
+    <p class="d-flex justify-content-between align-items-center mb-0">
+        <button type="submit" class="btn btn-primary px-4">
+            @Model.SubmitText
+        </button>
+        
+        <a href="@Model.AltActionUrl" class="text-decoration-none">
+            <small class="text-center d-flex text-muted">
+                @for (int i = 0; i < altActionLines.Length; i++)
+                {
+                    @altActionLines[i];
+                    if (i != altActionLines.Length - 1) { <br /> }
+                }
+            </small>
+        </a>
+    </p>
 }

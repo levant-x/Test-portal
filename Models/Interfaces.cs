@@ -47,7 +47,26 @@ namespace Portal.Interfaces
     public interface IArticlesService: ICountable
     {
         IEnumerable GetFeed(int page);
-        IContent GetArticle(int id);
+        IContent GetByID(int id);
         int PublishArticle(string text);
+    }
+
+    public interface ICredentials
+    {
+        string Token { get; set; }
+    }
+
+    public interface IAuthResult: ICredentials
+    {
+        IUser Bearer { get; set; }
+    }
+
+    public interface IUsersService
+    {
+        IUser GetByID(int id);    
+        bool RegisterNew(IUser user);
+        IAuthResult Authenticate(string login, string password);
+        bool Update(IUser user, IProfile profile);
+        void Logout();
     }
 }

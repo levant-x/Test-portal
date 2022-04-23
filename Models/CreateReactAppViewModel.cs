@@ -3,11 +3,10 @@ using Microsoft.AspNetCore.Http;
 using System.Net;
 using System.IO;
 using System;
-using Portal.Interfaces;
 
 namespace Portal.Models
 {
-    public class CreateReactAppVM: ICountable
+    public class CreateReactAppVM: Portal.Interfaces.ICredentials
     {
         private static readonly Regex _parser = new Regex(@"<head>(?<HeadContent>.*)</head>\s*" +
             "<body>(?<BodyContent>.*)</body>", RegexOptions.IgnoreCase | RegexOptions.Singleline);
@@ -19,7 +18,8 @@ namespace Portal.Models
 
         public string Head { get; set; }
         public string Body { get; set; }
-        public int Total { get; set; }
+        public string Token { get; set; }
+        
 
         public CreateReactAppVM(HttpContext context, string fileName = "index.html")
         {

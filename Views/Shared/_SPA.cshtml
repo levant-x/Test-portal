@@ -13,11 +13,8 @@
     window.SERVER_HOST = '@Context.Request.Host';
     window.SERVER_PATH_BASE = '@Context.Request.PathBase';
   </script>
-
-  @if (true) // will be auth check here
-  {
-    <input id='pagination-data' value="@Model.Total" hidden />
-  }
+  
+  <input id='__token' value='@Model.Token' hidden />
   @Html.Raw(Model.Body)
 </body>
 </html>

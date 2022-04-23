@@ -10,7 +10,6 @@ export default function NavMenu() {
         dark
         expand="sm"
         fixed='top'
-        full
         light
       >
         <Nav className="me-auto" navbar >

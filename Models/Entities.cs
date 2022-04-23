@@ -5,6 +5,7 @@ using Portal.Interfaces;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 namespace Portal.Models
 {
@@ -14,6 +15,7 @@ namespace Portal.Models
         [DataType(DataType.Password)]
         [MinLength(4)]
         [Display(Prompt = "Пароль")]
+        [JsonIgnore]
         public string Password { get; set; }
     }
 
@@ -49,7 +51,6 @@ namespace Portal.Models
         [Required]
         [Range(typeof(DateTime), "1/1/2000", "1/1/2018")]
         [Display(Prompt = "Дата рождения")]
-        [DataType(DataType.Date)]
         public DateTime BirthDate { get; set; }
 
         [Required]

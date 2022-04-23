@@ -6,8 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Portal.Interfaces;
-using Portal.Models;
 using Portal.Services;
+using Portal.Helpers;
 
 namespace Portal
 {
@@ -24,12 +24,15 @@ namespace Portal
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddScoped<IArticlesService, ArticlesService>();
 
-            var connectionString = Configuration.GetConnectionString("Default");
+            var connectionString = Configuration.GetConnectionString("Default"); // database
             services.AddDbContext<DataContext>(opts => opts.UseMySql(connectionString,
                 ServerVersion.AutoDetect(connectionString)));
 
+            services.Configure<AppConfig>(Configuration.GetSection("AppSettings"));
+            services.AddScoped<IArticlesService, ArticlesService>();
+            services.AddScoped<IUsersService, UsersService>();
+            
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -51,12 +54,13 @@ namespace Portal
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
             app.UseRouting();
+            app.UseMiddleware<JwtMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}");
+                    pattern: "{controller=Auth}/{action=Index}");
                 endpoints.MapControllerRoute(
                     name: "api",
                     pattern: "api/{controller}");

@@ -2,16 +2,16 @@
 @using Portal.Helpers
 
 <div class="mb-3">
-  @Html.TextBoxFor(user => user.EMail, Themes.FormControlStyle)
+  @Html.TextBoxFor(user => user.EMail, Themes.FormInputStyle)
   @Html.ValidationMessageFor(user => user.EMail, "", Themes.FormErrorMsgStyle)
 </div>
 
 <div class="mb-3">
-  @Html.TextBoxFor(user => user.Phone, Themes.FormControlStyle)
+  @Html.TextBoxFor(user => user.Phone, Themes.FormInputStyle)
   @Html.ValidationMessageFor(user => user.Phone, "", Themes.FormErrorMsgStyle)
 </div>
 
 <div class="mb-3">
-  @Html.TextBoxFor(user => user.Password, Themes.FormControlStyle)
+  @Html.PasswordFor(user => user.Password, Themes.FormInputStyle)
   @Html.ValidationMessageFor(user => user.Password, "", Themes.FormErrorMsgStyle)
 </div>

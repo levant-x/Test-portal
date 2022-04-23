@@ -1,0 +1,17 @@
+@model Portal.Models.Profile
+@using Portal.Helpers
+
+<div class="mb-3">
+  @Html.TextBoxFor(profile => profile.FirstName, Themes.FormInputStyle)
+  @Html.ValidationMessageFor(profile => profile.FirstName, "", Themes.FormErrorMsgStyle)
+</div>
+
+<div class="mb-3">
+  @Html.TextBoxFor(profile => profile.Surname, Themes.FormInputStyle)
+  @Html.ValidationMessageFor(profile => profile.Surname, "", Themes.FormErrorMsgStyle)
+</div>
+
+<div class="mb-2">
+  @Html.TextBoxFor(profile => profile.BirthDate, Themes.FormDateInputStyle)
+  @Html.ValidationMessageFor(profile => profile.BirthDate, "", Themes.FormErrorMsgStyle)
+</div>
