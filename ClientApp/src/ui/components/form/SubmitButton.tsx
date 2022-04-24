@@ -1,13 +1,12 @@
 import { CSSProperties } from "react";
 import { Button } from "reactstrap";
-import { IChildren } from "../../../types/common";
+import { IChildren, IClickable } from "../../../types/common";
 import Preloader from "../Preloader";
 
-type Props = IChildren & {
+type Props = IChildren & IClickable & {
   className?: string
   style?: CSSProperties
   isLoading?: boolean
-  onClick?: Function
 }
 
 export default function SubmitButton({

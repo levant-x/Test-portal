@@ -13,9 +13,12 @@ export default function Home() {
 
   return (
     <>
-      {articles.length > 0 ? <p><em><small className="text-start">
-        Кликните по статье, чтобы увидеть полный текст, комментарии и оставить свой
-      </small></em></p> : ''}
+      <p><em><small className="text-start">
+        {articles.length > 0 ? 
+          'Кликните по статье, чтобы увидеть полный текст, комментарии и оставить свой' :
+          'Элементы не найдены'
+        }
+      </small></em></p>
 
       {/* TODO form for a new one */}     
 

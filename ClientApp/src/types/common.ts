@@ -25,11 +25,10 @@ export type FormProps = {
   model: any
 }
 
-export type FormInputProps = {
+export type FormInputProps = IExplainer & {
   attributeName: string 
   label: string  
   type: InputType
-  errors?: Record<string, string> 
 }
 
 
@@ -41,13 +40,24 @@ export interface IChildren {
   children?: React.ReactNode
 }
 
+export interface ILoading {
+  readonly isLoading: boolean
+}
+
 export interface IPageable {
   currentPage: number
 }
 
-export interface ILoadable {
-  readonly isLoading: boolean
+export interface IExplainer {
+  readonly errors?: Record<string, string> 
+}
+
+export interface ILoadable extends ILoading {
   load(url?: string): void
+}
+
+export interface IClickable {
+  onClick?: Function
 }
 
 export interface INotifyable {
@@ -58,9 +68,8 @@ export interface INotifier {
   readonly messages: Message[]  
 }
 
-export interface IEntityStore<T extends IData> extends ILoadable {  
+export interface IEntityStore<T extends IData> extends ILoadable, IExplainer {  
   readonly entity?: T | T[]
-  readonly errors?: Record<string, string>
   save(item?: T): Promise<boolean>
 }
 

@@ -1,37 +1,36 @@
-import { FormGroup } from "reactstrap"
-import { FormInputProps, IEntityStore } from "../../../types/common"
-import FormInput from "./FormInput"
+import { 
+  FormProps, 
+  IChildren, 
+  IClickable, 
+  IExplainer, 
+  ILoading 
+} from "../../../types/common"
+import SubmitButton from "./SubmitButton"
 
-type MetaInput = Omit<FormInputProps, 'attributeName'>
+type Props = FormProps & IExplainer & ILoading & IClickable & IChildren
 
-type Props<T, M extends keyof T> = {
-  model: T
-  metadata: Record<M, MetaInput>
-  children?: JSX.Element | JSX.Element[]
-} & Pick<IEntityStore<any>, 'errors'>
-
-export default function Form<T, M extends keyof T>({
-  metadata,
+export default function Form({
+  errors,
+  isLoading,
+  onClick,
   children,
-  ...rest
-}: Props<T, M>) {
+}: Props) {
   return (
-    <>
-      {(Object.entries<FormInputProps>(metadata as Record<string, any>)
-        .map(([attrName, field]) => 
-          <FormInput 
-            key={attrName}
-            attributeName={attrName}
-            {...field}
-            {...rest}
-          />)
-      )}
+    <div className="mt-2 container-fluid">
+      {children}
+      
+      <div className="d-flex justify-content-end align-items-center">
+        {errors && Object.keys(errors).length ? 
+          <i className="bi bi-exclamation-triangle-fill icon-warning me-3"></i> :
+          <i className="bi bi-check-lg icon-success me-3"></i>
+        }
 
-      {Array.isArray(children) ? children.map(child => 
-        <FormGroup className="p-2 mb-0">
-          {child}
-        </FormGroup>
-      ) : children}
-    </>
+        <SubmitButton 
+          className="my-3 " 
+          isLoading={isLoading} 
+          onClick={onClick} 
+        />
+      </div>
+    </div>
   )
 }

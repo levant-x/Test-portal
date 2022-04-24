@@ -5,16 +5,17 @@ import { IEntityStore } from "../types/common"
 import { IArticle } from "../types/models"
 import PaginationService from "./pagination-service"
 
-const paginationService = new PaginationService(transport) // TODO MOVE TO FIELDS
-const articlesStore = new ArticlesStore(transport)
-
 class ArticlesService implements IEntityStore<IArticle> {
+  protected paginationService = new PaginationService(transport)
+  protected articlesStore = new ArticlesStore(transport)
+
   entity: IArticle[] = []
   currentPage: number = 0
   isLoading: boolean = false
 
   constructor() {
-    !paginationService.total && paginationService.load(APIEndpoints.articles)
+    const pgn = this.paginationService
+    !pgn.total && pgn.load(APIEndpoints.articles)
   }
 
   save(item: IArticle): Promise<boolean> {

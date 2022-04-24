@@ -7,7 +7,7 @@ export default function ContentHeader({
 }: Props) {
   return (
     <small className="d-flex justify-content-between">
-      <span>{profile?.firstname || email || phone}</span>
+      <span>{profile?.firstName || email || phone}</span>
       <span><em>{publishedAt}</em></span>
     </small>
   )

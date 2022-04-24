@@ -3,7 +3,12 @@ import { useFormInput } from "../../../infrastructure/use-form-input";
 import { FormInputProps } from "../../../types/common"
 
 export default function FormInput(props: FormInputProps) {
-  const { value, onValueChange, errorLines } = useFormInput(props)
+  const isDateTime = ['date', 'time']
+    .some(typeKey => props.type.includes(typeKey))
+  const { value, onValueChange, errorLines } = useFormInput({
+    isDateTime,
+    ...props,
+  })
 
   return (
     <FormGroup className="p-2 mb-0">

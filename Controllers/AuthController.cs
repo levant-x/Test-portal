@@ -66,7 +66,7 @@ namespace Portal
         public IActionResult Profile()
         {
             var user = (User)HttpContext.Items[AppConfig.USER_KEY];
-            user.Profile = new Profile();
+            if (user.Profile == null) user.Profile = new Profile();
             return new JsonResult(user);
         }
 

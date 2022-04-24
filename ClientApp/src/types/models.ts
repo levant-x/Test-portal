@@ -1,9 +1,9 @@
 import { Estimation, IData } from "./common"
 
 export interface IProfile extends IData, Partial<{
-  firstname: string
+  firstName: string
   surname: string
-  birthdate: Date
+  birthDate: Date
 }> {}
 
 export interface IUser extends IData {
