@@ -19,7 +19,7 @@ namespace Portal.Models
         public string Password { get; set; }
     }
 
-    [Index(nameof(EMail), IsUnique = true)]
+    [Index(nameof(Email), IsUnique = true)]
     [Index(nameof(Phone), IsUnique = true)]
     public class User: AuthModel, IUser
     {
@@ -27,25 +27,25 @@ namespace Portal.Models
         [Required(ErrorMessage = "Поле обязательно")]
         [EmailAddress]
         [Display(Prompt = "EMail")]
-        public string EMail { get; set; }
+        public string Email { get; set; }
         [Required(ErrorMessage = "Поле обязательно")]
         [Phone]
         [Display(Prompt = "Номер телефона")]
         public string Phone { get; set; }
 
-        public IProfile Profile { get; set; }
+        public Profile Profile { get; set; }
     }
 
     public class Profile : IProfile
     {
         public int ID { get; set; }
         [Required(ErrorMessage = "Поле обязательно")]
-        [Range(2, 20)]
         [Display(Prompt = "Имя")]
+        [StringLength(20, MinimumLength = 2)]
         public string FirstName { get; set; }
         [Required(ErrorMessage = "Поле обязательно")]
-        [Range(2, 20)]
         [Display(Prompt = "Фамилия")]
+        [StringLength(20, MinimumLength = 2)]
         public string Surname { get; set; }
         public string Avatar { get; set; }
         [Required(ErrorMessage = "Поле обязательно")]
@@ -53,7 +53,6 @@ namespace Portal.Models
         [Display(Prompt = "Дата рождения")]
         public DateTime BirthDate { get; set; }
 
-        [Required(ErrorMessage = "Поле обязательно")]
         [ForeignKey("UserID")]
         public User User { get; set; }
     }

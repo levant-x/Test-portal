@@ -13,6 +13,7 @@ namespace Portal.Services
 
         public DataContext(DbContextOptions<DataContext> options): base(options)
         {
+            ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

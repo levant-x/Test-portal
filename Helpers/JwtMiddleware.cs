@@ -25,11 +25,8 @@ namespace Portal.Helpers
 
         public async Task Invoke(HttpContext context, IUsersService usersService)
         {
-            var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJuYmYiOj" +
-                "E2NTA3MDc5ODIsImV4cCI6MTY1MDg4MDc4MiwiaWF0IjoxNjUwNzA3OTgyfQ.2aEdcDBGl"+
-                "wCpp3gPIIj6ngk1Dwsddo7sdnVNk8L6ZwE"; // JUST FOR DEBUGGING
-                
-             /*  context.Request.Headers["Authorization"]
+            var token =  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgiLCJuYmYiOjE2NTA3Nzg4ODIsImV4cCI6MTY1MDk1MTY4MiwiaWF0IjoxNjUwNzc4ODgyfQ.4bKluxfuKWzy1owScmQBFr6w6rVMSpaIHBNwKTwrM3g";
+              /* context.Request.Headers["Authorization"]
                 .FirstOrDefault()?.Split(' ')
                 .Last(); */
             if (token != null) _TryAttachUser2Context(context, token, usersService);
@@ -44,7 +41,7 @@ namespace Portal.Helpers
 
             var token = (JwtSecurityToken)validatedToken;
             var userID = int.Parse(token.Claims.First(claim => claim.Type == "id").Value);
-            context.Items["User"] = usersService.GetByID(userID);
+            context.Items[AppConfig.USER_KEY] = usersService.GetByID(userID);
             UserID = userID;
         }
 

@@ -1,3 +1,5 @@
+import { InputType } from "reactstrap/types/lib/Input"
+
 export enum Paths {
   home = '/',
   profile = '/profile',
@@ -12,11 +14,22 @@ export enum Estimation {
 export type Options = Record<string, any> & {
   rawText?: boolean
   level?: 'info' | 'warning' | 'danger'
+  body?: any
 }
 
 export type Message = Options & IData & {
   type?: 'alert' | 'close' | 'update'
-  body?: any
+}
+
+export type FormProps = {
+  model: any
+}
+
+export type FormInputProps = {
+  attributeName: string 
+  label: string  
+  type: InputType
+  errors?: Record<string, string> 
 }
 
 
@@ -33,7 +46,8 @@ export interface IPageable {
 }
 
 export interface ILoadable {
-  load(url: string): void
+  readonly isLoading: boolean
+  load(url?: string): void
 }
 
 export interface INotifyable {
@@ -44,10 +58,10 @@ export interface INotifier {
   readonly messages: Message[]  
 }
 
-export interface IItemsStore<T extends IData> extends IPageable, ILoadable {  
-  readonly items: T[]
-  readonly isLoading: boolean
-  save(item: T): Promise<boolean>
+export interface IEntityStore<T extends IData> extends ILoadable {  
+  readonly entity?: T | T[]
+  readonly errors?: Record<string, string>
+  save(item?: T): Promise<boolean>
 }
 
 export interface IDeletable {

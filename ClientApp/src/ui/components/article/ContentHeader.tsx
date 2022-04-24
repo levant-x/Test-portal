@@ -1,13 +1,13 @@
-import { IAuthor, IContent } from "../../../types/models"
+import { IUser, IContent } from "../../../types/models"
 
-type Props = IAuthor & Pick<IContent, 'publishedAt'>
+type Props = IUser & Pick<IContent, 'publishedAt'>
 
 export default function ContentHeader({
-  name, email, phone, publishedAt,  
+  profile, email, phone, publishedAt,  
 }: Props) {
   return (
     <small className="d-flex justify-content-between">
-      <span>{name || email || phone}</span>
+      <span>{profile?.firstname || email || phone}</span>
       <span><em>{publishedAt}</em></span>
     </small>
   )

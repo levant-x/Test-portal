@@ -54,5 +54,10 @@ namespace Portal.Services
         {
             throw new System.NotImplementedException();
         }
+
+        public void Dispose()
+        {
+            dataContext.Dispose();
+        }
     }
 }

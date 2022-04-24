@@ -1,6 +1,6 @@
-using System;
 using Microsoft.AspNetCore.Mvc;
 using Portal.Attributes;
+using Portal.Helpers;
 using Portal.Interfaces;
 using Portal.Models;
 
@@ -8,7 +8,7 @@ namespace Portal
 {
     public enum AuthPage
     {
-        Login, Register, Profile
+        Login, Register
     }
 
     public class AuthController: Controller
@@ -20,16 +20,14 @@ namespace Portal
             this.usersService = usersService;
         }
 
-        public IActionResult Index()
+        public IActionResult Index() // login
         {
-            // TODO redirect home if authenticated
-
             ViewBag.AuthPage = AuthPage.Login;
             return View(new LoginVM());
         }
 
         [HttpPost]
-        public IActionResult Index(LoginVM loginVM)
+        public IActionResult Index(LoginVM loginVM) // login
         {
             ViewBag.AuthPage = AuthPage.Login;
             if (!ModelState.IsValid) return View(loginVM);
@@ -43,7 +41,6 @@ namespace Portal
             return SPA(credent.Token);
         }
 
-
         public IActionResult Register()
         {
             ViewBag.AuthPage = AuthPage.Register;
@@ -55,30 +52,34 @@ namespace Portal
         {
             ViewBag.AuthPage = AuthPage.Register;
             if (!ModelState.IsValid) return View("Index", user);
-
-            if (!usersService.RegisterNew(user))
+            else if (!usersService.RegisterNew(user))
             {
                 ModelState.AddModelError("", "Указанные вами данные уже используются\n" +
                     "Укажите другие или авторизуйтесь");
                 return View("Index", user);
             } 
-            var credent = usersService.Authenticate(user.EMail, user.Password);
+            var credent = usersService.Authenticate(user.Email, user.Password);
             return SPA(credent.Token);
         }
 
-        [AuthorizeAttribute]
+        [Authorize(AllowWithoutProfile = true)]
         public IActionResult Profile()
         {
-            ViewBag.AuthPage = AuthPage.Profile; 
-            throw new NotImplementedException(); // TODO return markup
+            var user = (User)HttpContext.Items[AppConfig.USER_KEY];
+            user.Profile = new Profile();
+            return new JsonResult(user);
         }
 
         [HttpPost]
-        [AuthorizeAttribute]
-        public IActionResult Profile(Profile profile)
+        [Authorize(AllowWithoutProfile = true)]
+        public IActionResult Profile([FromBody] User user)
         {
-            ViewBag.Profile = profile;
-            throw new NotImplementedException(); // TODO return json
+            ModelState.Remove("Password"); // password has to change another way
+            if (!ModelState.IsValid) 
+                return new JsonResult(ModelHelper.GetModelErrors(ModelState));
+
+            usersService.Update(user);
+            return new JsonResult(user);
         } 
 
         protected IActionResult SPA(string token)

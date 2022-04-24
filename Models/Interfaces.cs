@@ -15,7 +15,7 @@ namespace Portal.Interfaces
 
     public interface IUser: IData
     {
-        string EMail { get; set; }
+        string Email { get; set; }
         string Phone { get; set; }
         string Password { get; set; }
     }
@@ -44,7 +44,7 @@ namespace Portal.Interfaces
         bool IsPositive { get; set; }
     }
 
-    public interface IArticlesService: ICountable
+    public interface IArticlesService: ICountable, IDisposable
     {
         IEnumerable GetFeed(int page);
         IContent GetByID(int id);
@@ -61,12 +61,12 @@ namespace Portal.Interfaces
         IUser Bearer { get; set; }
     }
 
-    public interface IUsersService
+    public interface IUsersService: IDisposable
     {
         IUser GetByID(int id);    
         bool RegisterNew(IUser user);
         IAuthResult Authenticate(string login, string password);
-        bool Update(IUser user, IProfile profile);
+        bool Update(IUser user);
         void Logout();
     }
 }

@@ -7,7 +7,7 @@ namespace Portal.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [AuthorizeAttribute]
+    [Authorize]
     public class ArticlesController : ControllerBase
     {
         protected IArticlesService articlesService;

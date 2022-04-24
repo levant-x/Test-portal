@@ -8,6 +8,7 @@ using System.Security.Claims;
 using System.Linq;
 using System.Text;
 using Portal.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Portal.Services
 {
@@ -25,8 +26,10 @@ namespace Portal.Services
         public IAuthResult Authenticate(string login, string password)
         {
             var user = dataContext.Users
-                .SingleOrDefault(existing => existing.Password == password &&
-                (existing.EMail == login || existing.Phone == login));
+                .Where(existing => existing.Password == password && (existing
+                .Email == login || existing.Phone == login))
+                .AsNoTracking()
+                .SingleOrDefault();
             if (user == null) return null;
             return new AuthResult()
             {
@@ -37,7 +40,9 @@ namespace Portal.Services
 
         public IUser GetByID(int id)
         {
-            return dataContext.Users.FirstOrDefault(user => user.ID == id);
+            return dataContext.Users
+                .Include(user => user.Profile)
+                .SingleOrDefault(user => user.ID == id);
         }
 
         public void Logout()
@@ -48,17 +53,26 @@ namespace Portal.Services
         public bool RegisterNew(IUser userData)
         {
             if (dataContext.Users
-                .Any(user => user.EMail == userData.EMail || user
+                .Any(user => user.Email == userData.Email || user
                 .Phone == userData.Phone)) return false;
 
             dataContext.Users.Add((User)userData);
-            dataContext.SaveChanges();
-            return true;
+            return dataContext.SaveChanges() == 1;
         }
 
-        public bool Update(IUser user, IProfile profile)
+        public bool Update(IUser user)
         {
-            throw new System.NotImplementedException();
+            var persistedPassword = dataContext.Users
+                .Single(prev => prev.ID == user.ID).Password;
+            user.Password = persistedPassword; // the password is updated another way
+
+            dataContext.Update(user);
+            return dataContext.SaveChanges() > 0;
+        }
+
+        public void Dispose()
+        {
+            dataContext.Dispose();
         }
 
         private string _GenerateJwt(int id)

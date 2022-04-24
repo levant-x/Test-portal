@@ -1,3 +1,4 @@
+import { LIKE_ACTIVE_CLASS_NAME } from "../../../config/consts"
 import { IChildren } from "../../../types/common"
 
 type Props = {
@@ -16,7 +17,7 @@ export default function HandsCounter({
   onHoverChange,
   onClick,
 }: Props) {
-  const isOnClass = isOn ? 'attitude-involved ' : ''
+  const isOnClass = isOn ? LIKE_ACTIVE_CLASS_NAME : ''
 
   return (
     <>

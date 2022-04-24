@@ -23,11 +23,14 @@ namespace Portal
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddNewtonsoftJson(options => options
+                .SerializerSettings.ReferenceLoopHandling = 
+                    Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             var connectionString = Configuration.GetConnectionString("Default"); // database
             services.AddDbContext<DataContext>(opts => opts.UseMySql(connectionString,
                 ServerVersion.AutoDetect(connectionString)));
+    
 
             services.Configure<AppConfig>(Configuration.GetSection("AppSettings"));
             services.AddScoped<IArticlesService, ArticlesService>();

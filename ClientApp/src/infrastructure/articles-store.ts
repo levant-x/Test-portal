@@ -1,17 +1,17 @@
 import { action, computed, makeAutoObservable } from "mobx"
-import { ARTICLES_URL } from "../config/consts"
-import { IItemsStore, ITransport } from "../types/common"
+import { APIEndpoints } from "../config/consts"
+import { IEntityStore, ITransport } from "../types/common"
 import { IArticle } from "../types/models"
 
 
-export default class ArticlesStore implements IItemsStore<IArticle> {
+export default class ArticlesStore implements IEntityStore<IArticle> {
   private _items: IArticle[] = []
   private _isLoading = false
   private _loadedPages: number[] = []
 
   currentPage = 0
 
-  get items(): IArticle[] {
+  get entity(): IArticle[] {
     return [...this._items]
   }
 
@@ -23,7 +23,7 @@ export default class ArticlesStore implements IItemsStore<IArticle> {
     makeAutoObservable(this)
   }
 
-  load(url: string): void {
+  load(): void {
     throw new Error("Method not implemented.")
   }
 
@@ -36,7 +36,7 @@ export default class ArticlesStore implements IItemsStore<IArticle> {
     if (_isLoading || !currentPage || _loadedPages.includes(pageNum)) return
 
     this._isLoading = true
-    const url = `${ARTICLES_URL}/${pageNum}`
+    const url = `${APIEndpoints.articles}/${pageNum}`
 
     try {
       const articles = await this._transport.loadMany<IArticle>(url)

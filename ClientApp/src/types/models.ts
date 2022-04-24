@@ -1,13 +1,19 @@
 import { Estimation, IData } from "./common"
 
-export interface IAuthor extends IData {
+export interface IProfile extends IData, Partial<{
+  firstname: string
+  surname: string
+  birthdate: Date
+}> {}
+
+export interface IUser extends IData {
   phone?: string
   email?: string
-  name?: string
+  profile: IProfile
 }
 
 export interface IContent extends IData {
-  author: IAuthor
+  author: IUser
   publishedAt: string
   title?: string
   body: string
