@@ -1,5 +1,5 @@
 import { FormFeedback, FormGroup, Input } from "reactstrap"
-import { useFormInput } from "../../../infrastructure/use-form-input";
+import { useFormInput } from "../../../application/use-form-input";
 import { FormInputProps } from "../../../types/common"
 
 export default function FormInput(props: FormInputProps) {
@@ -20,8 +20,8 @@ export default function FormInput(props: FormInputProps) {
         onChange={({target}) => onValueChange(target.value)}
       />
 
-      {errorLines?.map((line) => (
-        <FormFeedback className="ps-2">
+      {errorLines?.map((line, i) => (
+        <FormFeedback key={i} className="ps-2">
           {line}
         </FormFeedback>)
       )}

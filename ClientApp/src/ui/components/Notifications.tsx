@@ -6,7 +6,7 @@ export default function Notifications() {
 
   return (
     <div className="d-flex justify-content-center">
-      {messages.map(message => 
+      {messages.filter(message => message.type === 'alert').map(message => 
         <Alert
           key={message.id}
           color={message.level}
@@ -14,8 +14,7 @@ export default function Notifications() {
           toggle={() => onClose(message.id)}
         >
           {message.body}
-        </Alert>)
-      }
+        </Alert>)}
     </div>
   )
 }

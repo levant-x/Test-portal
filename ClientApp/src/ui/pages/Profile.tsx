@@ -1,10 +1,16 @@
 import { CSSProperties } from "react"
 import { Button, Card } from "reactstrap";
 import useEntity from "../../application/use-entity";
-import userProfileService from "../../services/user-profile-service";
+import { APIEndpoints } from "../../config/consts";
+import transport from "../../infrastructure/transport";
+import EntityService from "../../services/entity-service";
 import { IUser } from "../../types/models";
 import Form from "../components/form/Form";
 import FormSection from "../components/form/FormSection"
+
+const service = new EntityService(transport, APIEndpoints.userProfile)
+service.mode = 'one'
+service.load()
 
 export default function Profile() {
   const { 
@@ -12,7 +18,7 @@ export default function Profile() {
     entity, 
     save, 
     errors,
-  } = useEntity(userProfileService)
+  } = useEntity(service)
   const user = entity as IUser
 
   const cardClass = 'col-sm-12 col-md-4'
@@ -27,7 +33,7 @@ export default function Profile() {
       <div className="d-flex justify-content-between">
         <Card body className={cardClass} style={formStyle}>
           <FormSection
-            model={user.profile}   
+            model={user?.profile}   
             errors={errors}
             metadata={{
               firstName: { label: 'Имя', type: 'text' },

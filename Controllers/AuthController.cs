@@ -78,8 +78,8 @@ namespace Portal
             if (!ModelState.IsValid) 
                 return new JsonResult(ModelHelper.GetModelErrors(ModelState));
 
-            usersService.Update(user);
-            return new JsonResult(user);
+            var result = usersService.Update(user);
+            return new JsonResult(result);
         } 
 
         protected IActionResult SPA(string token)

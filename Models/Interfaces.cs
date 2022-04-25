@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace Portal.Interfaces
 {
@@ -61,12 +62,18 @@ namespace Portal.Interfaces
         IUser Bearer { get; set; }
     }
 
+    public interface ISaveResult
+    {
+        IData Entity { get; set; }
+        IDictionary<string, string> Errors { get; }
+    }
+
     public interface IUsersService: IDisposable
     {
         IUser GetByID(int id);    
         bool RegisterNew(IUser user);
         IAuthResult Authenticate(string login, string password);
-        bool Update(IUser user);
+        ISaveResult Update(IUser user);
         void Logout();
     }
 }

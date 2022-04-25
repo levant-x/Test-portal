@@ -5,15 +5,24 @@ using Portal.Models;
 
 namespace Portal.Helpers
 {
-    class ModelHelper
+    static class ModelHelper
     {
-        public static ErrorsMV GetModelErrors(ModelStateDictionary modelState)
+        public static SaveResultVM GetModelErrors(ModelStateDictionary modelState)
         {
             var errors = modelState.Keys
                 .Where(key => modelState[key].Errors.Count > 0)
                 .ToDictionary(key => key.ToLower(), key => string.Join('\n', modelState[key].Errors
                 .Select(error => error.ErrorMessage)));
-            return new ErrorsMV() { Errors = errors };
+            return new SaveResultVM(errors);
+        }
+
+        public static void MarkDuplication(IDictionary<string, string> errors, List<User> scope, 
+            string propName, string value, string prompt)
+        {
+            var duplication = scope.FirstOrDefault(item => item.GetType().GetProperty(propName)
+                .GetValue(item).ToString().Normalize() == value.Normalize());
+            if (duplication == null) return;
+            errors.Add(propName, $"{prompt} уже используется");
         }
     }
 }

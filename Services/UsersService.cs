@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using Portal.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace Portal.Services
 {
@@ -28,7 +29,6 @@ namespace Portal.Services
             var user = dataContext.Users
                 .Where(existing => existing.Password == password && (existing
                 .Email == login || existing.Phone == login))
-                .AsNoTracking()
                 .SingleOrDefault();
             if (user == null) return null;
             return new AuthResult()
@@ -60,14 +60,26 @@ namespace Portal.Services
             return dataContext.SaveChanges() == 1;
         }
 
-        public bool Update(IUser user)
+        public ISaveResult Update(IUser user)
         {
+            var result = new SaveResultVM();
+            var toBeUnique = dataContext.Users
+                .Where(existing => (existing.Email == user.Email || existing
+                .Phone == user.Phone) && existing.ID != user.ID)
+                .ToList();
+
+            ModelHelper.MarkDuplication(result.Errors, toBeUnique, "Email", user.Email, "Email");
+            ModelHelper.MarkDuplication(result.Errors, toBeUnique, "Phone", user.Phone, "Номер");
+            if (result.Errors.Count > 0) return result;
+
             var persistedPassword = dataContext.Users
                 .Single(prev => prev.ID == user.ID).Password;
             user.Password = persistedPassword; // the password is updated another way
 
             dataContext.Update(user);
-            return dataContext.SaveChanges() > 0;
+            dataContext.SaveChanges();
+            result.Entity = user;
+            return result;
         }
 
         public void Dispose()

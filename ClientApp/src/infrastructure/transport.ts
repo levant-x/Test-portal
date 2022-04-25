@@ -1,7 +1,6 @@
 import { IData, ITransport, Options } from "../types/common";
 import notifier from '../services/notifications-service'
 import { TOKEN_BEARER_ID } from "../config/consts";
-import { toJS } from "mobx";
 
 type Method = 'GET' | 'POST'
 
@@ -24,7 +23,7 @@ class Transport implements ITransport {
 
   save(url: string, item: IData): Promise<IData> {
     return this.call(url, 'POST', {
-      body: JSON.stringify(toJS(item)),
+      body: JSON.stringify((item)),
     })
   }
 

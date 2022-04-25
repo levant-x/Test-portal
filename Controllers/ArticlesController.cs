@@ -27,7 +27,7 @@ namespace Portal.Controllers
         }
 
         [HttpGet]
-        [Route("all/{page:int?}")]
+        [Route("all")]
         public IActionResult GetAll()
         {
             return Ok(new { Total = articlesService.Total });

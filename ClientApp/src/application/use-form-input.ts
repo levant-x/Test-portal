@@ -13,7 +13,7 @@ export function useFormInput({
   isDateTime,
 }: FormInputProps & FormProps & Props) {
 
-  let initValue = model[attributeName] as string || ''
+  let initValue = model?.[attributeName] as string || ''
   if (isDateTime) initValue = initValue.substring(0, 10) 
 
   const [value, setValue] = useState(initValue)  

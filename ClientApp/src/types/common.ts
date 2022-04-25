@@ -45,7 +45,7 @@ export interface ILoading {
 }
 
 export interface IPageable {
-  currentPage: number
+  readonly currentPage: number
 }
 
 export interface IExplainer {
@@ -53,6 +53,7 @@ export interface IExplainer {
 }
 
 export interface ILoadable extends ILoading {
+  mode: 'one' | 'many'
   load(url?: string): void
 }
 
@@ -70,7 +71,8 @@ export interface INotifier {
 
 export interface IEntityStore<T extends IData> extends ILoadable, IExplainer {  
   readonly entity?: T | T[]
-  save(item?: T): Promise<boolean>
+  readonly newItem?: T
+  save(): void
 }
 
 export interface IDeletable {
@@ -85,5 +87,6 @@ export interface ITransport {
 
 export interface IPagination extends IPageable, ILoadable {
   total: number
+  scroll(id: number): void
 }
 

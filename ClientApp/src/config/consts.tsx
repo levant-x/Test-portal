@@ -5,5 +5,6 @@ export const TOKEN_BEARER_ID = '__token'
 
 export enum APIEndpoints {
   articles = '/api/articles/all',
-  userProfile = '/auth/profile',
+  article = '/api/article',
+  userProfile = '/auth/profile',  
 }
