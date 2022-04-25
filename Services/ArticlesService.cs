@@ -6,6 +6,8 @@ using Portal.Models;
 using System;
 using System.Collections;
 using Portal.Attributes;
+using Microsoft.AspNetCore.Http;
+using Portal.Helpers;
 
 namespace Portal.Services
 {
@@ -13,6 +15,7 @@ namespace Portal.Services
     public class ArticlesService : IArticlesService
     {
         protected readonly DataContext dataContext;
+        protected readonly HttpContext httpContext;
 
         protected const int LIMIT = 10;
         protected const int EXCERPT_LEN = 300;
@@ -22,9 +25,10 @@ namespace Portal.Services
             get { return dataContext.Articles.Count(); }    
         }
 
-        public ArticlesService(DataContext dataContext)
+        public ArticlesService(DataContext dataContext, IHttpContextAccessor context)
         {
             this.dataContext = dataContext;
+            this.httpContext = context.HttpContext;
         }
 
         public IEnumerable GetFeed(int page)
@@ -37,7 +41,7 @@ namespace Portal.Services
                     ID = article.ID,
                     Body = article.Body.Substring(0, EXCERPT_LEN),
                     Author = article.Author,                    
-                    PublishedAt = article.PublishedAt.ToString("MM.dd.yyyy HH:mm"),
+                    PublishedAt = article.PublishedAt.ToUniversalTime(),
                     LikesNum = article.Estimations.Count(e => e.IsPositive),
                     DislikesNum = article.Estimations.Count(e => !e.IsPositive),
                     CommentsNum = article.Comments.Count()
@@ -50,9 +54,21 @@ namespace Portal.Services
             throw new System.NotImplementedException();
         }
 
-        public int PublishArticle(string text)
+        public ISaveResult PublishArticle(string text)
         {
-            throw new System.NotImplementedException();
+            var article = dataContext.Articles.Add(new Article()
+            {
+                Body = text,
+                PublishedAt = DateTime.Now,
+                AuthorID = ((User)httpContext.Items[AppConfig.USER_KEY]).ID,
+            }).Entity;
+
+            dataContext.SaveChanges();        
+            // article.PublishedAt = article.PublishedAt.ToUniversalTime(); 
+            return new SaveResultVM()
+            {
+                Entity = article,
+            };
         }
 
         public void Dispose()

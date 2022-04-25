@@ -72,6 +72,7 @@ export interface INotifier {
 export interface IEntityStore<T extends IData> extends ILoadable, IExplainer {  
   readonly entity?: T | T[]
   readonly newItem?: T
+  readonly isSaving: boolean
   save(): void
 }
 
@@ -85,7 +86,7 @@ export interface ITransport {
   save(url: string, item: IData): Promise<IData>
 }
 
-export interface IPagination extends IPageable, ILoadable {
+export interface IPagination extends IPageable, Pick<ILoadable, 'load'> {
   total: number
   scroll(id: number): void
 }

@@ -31,7 +31,7 @@ namespace Portal
             services.AddDbContext<DataContext>(opts => opts.UseMySql(connectionString,
                 ServerVersion.AutoDetect(connectionString)));
     
-
+            services.AddHttpContextAccessor();
             services.Configure<AppConfig>(Configuration.GetSection("AppSettings"));
             services.AddScoped<IArticlesService, ArticlesService>();
             services.AddScoped<IUsersService, UsersService>();

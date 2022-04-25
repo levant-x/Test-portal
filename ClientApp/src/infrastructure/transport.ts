@@ -37,7 +37,7 @@ class Transport implements ITransport {
       ...options,
     }).then(async (resp) => {
       // debugger
-      const result = options?.rawText ? resp : await resp.json()  
+      const result = options?.rawText ? resp : await resp.json()
       if (resp.status.toString()[0] == '4' && result.message) throw result
       return result
     }).catch(this.catch)

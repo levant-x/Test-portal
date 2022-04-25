@@ -1,4 +1,4 @@
-import { makeObservable, observable, reaction } from "mobx"
+import { computed, makeObservable, reaction } from "mobx"
 import { APIEndpoints } from "../config/consts"
 import transport from "../infrastructure/transport"
 import { IExplainer, IPagination, ITransport } from "../types/common"
@@ -15,9 +15,10 @@ class ArticlesService extends EntityService<IArticle> {
   constructor(protected transport: ITransport, protected paginationService: IPagination) {
     super(transport)    
     this.mode = 'many'    
-    makeObservable(this.paginationService, {
-      currentPage: observable,
-      total: observable,
+    this._postUrl = APIEndpoints.articles.replace('all', '')
+    
+    makeObservable(this, {
+      pagination: computed,
     })
 
     reaction(() => this.pagination.currentPage, () => this.load()) 
@@ -25,7 +26,7 @@ class ArticlesService extends EntityService<IArticle> {
     this.load()
   }
 
-  override load() {
+  override load(): void {
     super.load()
   }
 
@@ -33,8 +34,8 @@ class ArticlesService extends EntityService<IArticle> {
     const url = APIEndpoints.articles
     this.paginationService.load(url)
 
-    const toLoad = !this.isLoading && this.pagination.total &&
-      !this.pageIndex.includes(this.paginationService.currentPage)
+    const toLoad = !this.isLoading && this.pagination.total && !this.pageIndex
+      .includes(this.paginationService.currentPage)
     return toLoad
   }
 
@@ -45,13 +46,34 @@ class ArticlesService extends EntityService<IArticle> {
   }
 
   protected override afterLoad(resp: IExplainer & { 
-    requestBag?: {pageNum: number }; data: IArticle | IArticle[] 
+    requestBag?: {pageNum: number }; data: IArticle[] 
   }): void {
     super.afterLoad(resp)
     this.pageIndex.push(resp.requestBag.pageNum)
 
-    const ids = (resp.data as IArticle[]).map(article => article.id)
-    this.itemsIndex = [...this.itemsIndex, ...ids]
+    const ids = (resp.data).map(article => article.id)
+    this.itemsIndex = [...this.itemsIndex, ...ids];
+
+    // the raw data is actually string formatted, but supposed a date in model
+    (this._entity as IArticle[]).forEach(this._formatPublishedAtType) 
+    this._reorderByTime()
+  }
+
+  protected override afterSaveSuccessful(article: IArticle): void {
+    this._formatPublishedAtType(article) // make a new look like the rest
+    super.afterSaveSuccessful(article)
+    this._reorderByTime()
+  }
+
+  private _formatPublishedAtType(article: IArticle): void {
+    article.publishedAt = new Date(article.publishedAt.toString())
+  }
+
+  private _reorderByTime(): void {
+    this.state.isLoading = true
+    const toNumber = (article: IArticle) => article.publishedAt.getTime()
+    this._entity.sort((older, newer) => toNumber(newer) - toNumber(older))
+    this.state.isLoading = false
   }
 }
 

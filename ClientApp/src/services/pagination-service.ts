@@ -1,12 +1,26 @@
+import { action, computed, makeObservable, observable } from "mobx";
 import { IPagination, ITransport } from "../types/common";
 
-export default class PaginationService implements IPagination {
-  total: number = 0
-  currentPage: number = 1
-  isLoading: boolean = false
-  mode: "one"
+type Total = {
+  total: number
+}
 
-  constructor(protected transport: ITransport) {}
+export default class PaginationService implements IPagination {
+  protected state = observable({
+    total: 0, currentPage: 1,
+  })
+
+  get total(): number { return this.state.total }
+  get currentPage(): number { return this.state.currentPage }
+
+  constructor(protected transport: ITransport) {
+    makeObservable(this, {
+      total: computed,
+      currentPage: computed,
+      load: action.bound,
+      scroll: action.bound,
+    })
+  }
 
   scroll(id: number): void {
     throw new Error("Method not implemented.");
@@ -15,6 +29,7 @@ export default class PaginationService implements IPagination {
   /** Updates the total pages info, the custom endpoint is {count} */
   load(url: string): void {    
     url = url.replace('{count}', 'count')
-    this.transport.loadOne<{ total: number }>(url).then(resp => this.total = resp?.total);
+    const setTotal = action((value: Total) => this.state.total = value.total)
+    this.transport.loadOne<Total>(url).then(setTotal);
   }
 }

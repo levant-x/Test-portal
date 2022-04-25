@@ -14,7 +14,7 @@ export interface IUser extends IData {
 
 export interface IContent extends IData {
   author: IUser
-  publishedAt: string
+  publishedAt: Date
   title?: string
   body: string
 }

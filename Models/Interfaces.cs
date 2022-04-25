@@ -31,6 +31,7 @@ namespace Portal.Interfaces
 
     public interface IContentBase: IData
     {
+        public int AuthorID { get; set; }
         IUser Author { get; set; }
     }
 
@@ -45,11 +46,17 @@ namespace Portal.Interfaces
         bool IsPositive { get; set; }
     }
 
+    public interface ISaveResult
+    {
+        IData Entity { get; set; }
+        IDictionary<string, string> Errors { get; }
+    }
+
     public interface IArticlesService: ICountable, IDisposable
     {
         IEnumerable GetFeed(int page);
         IContent GetByID(int id);
-        int PublishArticle(string text);
+        ISaveResult PublishArticle(string text);
     }
 
     public interface ICredentials
@@ -60,12 +67,6 @@ namespace Portal.Interfaces
     public interface IAuthResult: ICredentials
     {
         IUser Bearer { get; set; }
-    }
-
-    public interface ISaveResult
-    {
-        IData Entity { get; set; }
-        IDictionary<string, string> Errors { get; }
     }
 
     public interface IUsersService: IDisposable

@@ -7,16 +7,21 @@ import {
 } from "../../../types/common"
 import SubmitButton from "./SubmitButton"
 
-type Props = FormProps & IExplainer & ILoading & IClickable & IChildren
+type Props = FormProps & IExplainer & ILoading & IClickable & IChildren & {
+  containerClass?: string
+  buttonClass?: string
+}
 
-export default function Form({
+export default function FormFrame({
   errors,
   isLoading,
   onClick,
   children,
+  containerClass,
+  buttonClass,
 }: Props) {
   return (
-    <div className="mt-2 container-fluid">
+    <div className={containerClass ?? 'mt-2 container-fluid'}>
       {children}
       
       <div className="d-flex justify-content-end align-items-center">
@@ -26,10 +31,9 @@ export default function Form({
         }
 
         <SubmitButton 
-          className="my-3 " 
+          className={buttonClass ?? 'my-3'}
           isLoading={isLoading} 
-          onClick={onClick} 
-        />
+          onClick={onClick} />
       </div>
     </div>
   )

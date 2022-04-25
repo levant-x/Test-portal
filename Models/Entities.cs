@@ -74,9 +74,10 @@ namespace Portal.Models
     {
         public int ID { get; set; }
         [Required(ErrorMessage = "Поле обязательно")]
-        [Range(2, 255)]
+        [StringLength(255, MinimumLength = 2)]
         public string Body { get; set; }
         public DateTime PublishedAt { get; set; }   
+        public int AuthorID { get; set; }
 
         [Required(ErrorMessage = "Поле обязательно")]
         [ForeignKey("AuthorID")]
@@ -90,12 +91,12 @@ namespace Portal.Models
     {
         public int ID { get; set; }
         [Required(ErrorMessage = "Поле обязательно")]
-        [Range(50, 1042)]
+        [StringLength(1024, MinimumLength = 50)]
         public string Body { get; set; }
         [Required(ErrorMessage = "Поле обязательно")]
         public DateTime PublishedAt { get; set; }   
+        public int AuthorID { get; set; }
 
-        [Required(ErrorMessage = "Поле обязательно")]
         public IUser Author { get; set; }    
         public ICollection<Comment> Comments { get; set; }
         public ICollection<Estimation> Estimations { get; set; }

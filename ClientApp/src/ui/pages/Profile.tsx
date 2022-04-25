@@ -5,7 +5,7 @@ import { APIEndpoints } from "../../config/consts";
 import transport from "../../infrastructure/transport";
 import EntityService from "../../services/entity-service";
 import { IUser } from "../../types/models";
-import Form from "../components/form/Form";
+import FormFrame from "../components/form/FormFrame";
 import FormSection from "../components/form/FormSection"
 
 const service = new EntityService(transport, APIEndpoints.userProfile)
@@ -14,7 +14,7 @@ service.load()
 
 export default function Profile() {
   const { 
-    isLoading, 
+    isSaving, 
     entity, 
     save, 
     errors,
@@ -29,7 +29,7 @@ export default function Profile() {
   }
 
   return (
-    <Form model={entity} isLoading={isLoading} onClick={save}>
+    <FormFrame model={entity} isLoading={isSaving} onClick={save}>
       <div className="d-flex justify-content-between">
         <Card body className={cardClass} style={formStyle}>
           <FormSection
@@ -39,8 +39,7 @@ export default function Profile() {
               firstName: { label: 'Имя', type: 'text' },
               surname: { label: 'Фамилия', type: 'text', },
               birthDate: { label: 'Дата рождения', type: 'date', },
-            }}
-          />
+            }} />
         </Card>
 
         <Card body className={cardClass} style={formStyle}>
@@ -58,6 +57,6 @@ export default function Profile() {
           </FormSection>
         </Card>
       </div>
-    </Form>
+    </FormFrame>
   )
 }

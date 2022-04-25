@@ -8,7 +8,7 @@ export default function ContentHeader({
   return (
     <small className="d-flex justify-content-between">
       <span>{profile?.firstName || email || phone}</span>
-      <span><em>{publishedAt}</em></span>
+      <span><em>{new Date(publishedAt).toLocaleString('ru')}</em></span>
     </small>
   )
 }
