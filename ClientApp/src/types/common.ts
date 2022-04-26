@@ -33,6 +33,8 @@ export interface IChildren { children?: React.ReactNode }
 
 export interface IHoverable { onHover?(element: Element): void }
 
+export interface IScrollable { onScroll?(options: Options): void }
+
 export interface ILoading { readonly isLoading: boolean }
 
 export interface IPageable { readonly currentPage: number }
@@ -67,6 +69,8 @@ export interface ITransport {
 
 export interface IPagination extends IPageable, Pick<ILoadable, 'load'> {
   total: number
-  scroll(id: number): void
+  index: IData[]
+  onPageEnd: (upcomingPage: number) => void
+  scrollTo(id: number): void
 }
 

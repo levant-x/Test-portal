@@ -41,7 +41,6 @@ export default class EntityService<T extends IData> implements
       save: action.bound,
       load: action.bound,
     })
-    // observe(this, () => {})
     observe(notificationsService, 'messages', () => this.onMessage())
   }
 
@@ -93,14 +92,14 @@ export default class EntityService<T extends IData> implements
 
   /** When some data fetched */
   protected afterLoad(resp: Response<T>): void {
+    const setData = action((data: T[] | T) => this.state.entity = data)
     if (this.mode === 'one') {
-      this.state.entity = resp.data as T
+      setData(resp.data as T)
       return
-    }
-    if (!this.state.entity) this.state.entity = [];
-    const store = this.state.entity as T[]
-
-    if (Array.isArray(resp.data)) this.state.entity = [...store, ...resp.data]
+    }    
+    const store = this.state.entity as T[] || [] 
+    const newOnes = (<T[]>resp.data).filter(item => !store.includes(item))
+    if (Array.isArray(resp.data)) setData([...store, ...newOnes])
     else store.push(resp.data as T)
   }
 

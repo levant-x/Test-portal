@@ -72,7 +72,7 @@ namespace Portal.Interfaces
         IEnumerable GetFeed(int page);
         IContent GetByID(int id);
         ISaveResult<IContent> PublishArticle(string text);
-        ISaveResult<bool?> Estimate(int id, bool isPositive);
+        ISaveResult<object> Estimate(int id, bool isPositive);
         ISaveResult<IContent> Estimate(int id, IContent comment);
     }
 

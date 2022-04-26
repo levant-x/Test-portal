@@ -3,6 +3,7 @@ using Portal.Interfaces;
 using Portal.Services;
 using Portal.Attributes;
 using Portal.Models;
+using Portal.Helpers;
 
 namespace Portal.Controllers
 {
@@ -36,7 +37,7 @@ namespace Portal.Controllers
         [Route("all")]
         public IActionResult GetAll()
         {
-            return Ok(new { Total = articlesService.Total });
+            return Ok(new { Total = articlesService.Total, Limit = AppConfig.LIMIT });
         }
 
         [HttpGet]
@@ -58,9 +59,7 @@ namespace Portal.Controllers
         {
             var result = articlesService.Estimate(id, isPositive);
             if (result == null) return BadRequest();
-            var estimation = result.Value == true ? EstimationType.Liked :
-                result.Value == false ? EstimationType.Disliked : EstimationType.None;
-            return Ok(estimation);
+            return Ok(result.Value);
         }
     }
 }

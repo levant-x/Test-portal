@@ -17,9 +17,10 @@ export default function Home() {
     save,
   } = useEntity(articlesService)
   const articles = entity as IArticle[]
+  const pagination = articlesService.pagination
 
   return (
-    <>
+    <div>
       <p className="d-flex justify-content-start align-items-center">
         <button className="btn me-2" onClick={onUpdateClick}>
           <i className="bi bi-arrow-clockwise"></i>
@@ -48,15 +49,16 @@ export default function Home() {
           }} />
       </FormFrame>     
 
-      {articles?.map((article) => 
+      {articles?.map((article, i) => 
         <ArticlePreview 
-          key={article.id} 
+          key={i} 
           article={article} 
           onClick={args => articlesService.estimate(args)} 
+          onScroll={({id}) => pagination.scrollTo(id)}
         />
       )}
 
       {isLoading && <Preloader />}
-    </>
+    </div>
   )
 }

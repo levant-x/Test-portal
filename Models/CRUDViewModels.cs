@@ -13,4 +13,11 @@ namespace Portal.Models
             Errors = errors ?? new Dictionary<string, string>();
         }
     }
+
+    public class EstimationVM
+    {
+        public bool? Estimation { get; set; }
+        public int DeltaPos { get; set; }
+        public int DeltaNeg { get; set; }
+    }
 }
