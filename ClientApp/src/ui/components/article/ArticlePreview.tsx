@@ -1,4 +1,5 @@
 import { Card, CardBody, CardHeader, CardText, CardTitle } from "reactstrap";
+import useMutation from "../../../application/use-mutation";
 import { LIKE_ACTIVE_CLASS_NAME } from "../../../config/consts";
 import { Estimation, IClickable, IData } from "../../../types/common";
 import { IArticle } from "../../../types/models";
@@ -13,6 +14,7 @@ export default function ArticlePreview({
   article,
   onClick,
 }: Props) {
+  useMutation(article)
   return (
     <Card className="my-4">
       <CardHeader>

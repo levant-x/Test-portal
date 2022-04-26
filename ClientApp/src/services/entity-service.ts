@@ -12,9 +12,9 @@ export default class EntityService<T extends IData> implements
   IEntityStore<T>, IData {
   private __id = Math.round(Math.random() * 1000000)
   
-  protected _entity?
   protected _postUrl?: string
   protected state = observable({
+    entity: undefined,
     isLoading: false,
     isSaving: false,
     errors: undefined,
@@ -23,7 +23,7 @@ export default class EntityService<T extends IData> implements
 
   mode: "one" | "many"
 
-  get entity(): T | T[] | undefined { return this._entity }
+  get entity(): T | T[] | undefined { return this.state.entity }
   get newItem(): T | undefined { return <T>this.state.newItem }
 
   get isLoading(): boolean { return this.state.isLoading  }
@@ -47,7 +47,7 @@ export default class EntityService<T extends IData> implements
 
   save(): void {
     this.state.isSaving = true 
-    const item = this.mode === 'many' ? toJS(this.state.newItem) : this._entity
+    const item = this.mode === 'many' ? toJS(this.state.newItem) : toJS(this.state.entity)
     const url = this._postUrl ?? this._url
 
     const onSaved = (resp: any) => this.afterSave({ data: resp as T })
@@ -83,9 +83,8 @@ export default class EntityService<T extends IData> implements
   /** Return load begin condition. False cancels the load. Checks whether the 
    * array or singular item is present by default   */
   protected beforeLoad(): boolean {
-    const { _entity } = this   
-    const toLoad = Array.isArray(_entity) && !_entity.length ||
-      !(<IData>_entity)?.id
+    const { entity } = this.state
+    const toLoad = Array.isArray(entity) && !entity.length || !(<IData>entity)?.id
     return toLoad
   }
 
@@ -95,18 +94,18 @@ export default class EntityService<T extends IData> implements
   /** When some data fetched */
   protected afterLoad(resp: Response<T>): void {
     if (this.mode === 'one') {
-      this._entity = resp.data as T
+      this.state.entity = resp.data as T
       return
     }
-    if (!this._entity) this._entity = [];
-    const store = this._entity as T[]
+    if (!this.state.entity) this.state.entity = [];
+    const store = this.state.entity as T[]
 
-    if (Array.isArray(resp.data)) this._entity = [...store, ...resp.data]
+    if (Array.isArray(resp.data)) this.state.entity = [...store, ...resp.data]
     else store.push(resp.data as T)
   }
 
   protected formatErrors(errors: any): Record<string, string> {
-    return derefenceKeys(errors, matchFromEntity(toJS(this._entity)))
+    return derefenceKeys(errors, matchFromEntity(toJS(this.state.entity)))
   }
 
   protected afterSave(resp: Response<T>): boolean {
@@ -116,7 +115,7 @@ export default class EntityService<T extends IData> implements
   }
 
   protected afterSaveSuccessful(item: T): void {
-    if (this.mode === 'many') this._entity.push(item)
+    if (this.mode === 'many') this.state.entity.push(item)
     this.__cleanupSavedItem() // clear the template  
   }
 

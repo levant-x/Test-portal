@@ -10,6 +10,8 @@ class ArticlesService extends EntityService<IArticle> {
   protected pageIndex: number[] = [] 
   protected itemsIndex: number[] = []
 
+  protected get articles(): IArticle[] { return this.state.entity }
+
   get pagination(): IPagination { return this.paginationService }
 
   constructor(protected transport: ITransport, protected paginationService: IPagination) {
@@ -18,7 +20,7 @@ class ArticlesService extends EntityService<IArticle> {
     this._postUrl = APIEndpoints.articles.replace('all', '')
     
     makeObservable(this, {
-      pagination: computed,
+      pagination: computed,      
     })
 
     reaction(() => this.pagination.currentPage, () => this.load()) 
@@ -34,7 +36,7 @@ class ArticlesService extends EntityService<IArticle> {
     const url = APIEndpoints.articleEstimate.replace('{id}', args.id.toString())
     const isPositive = Boolean(args.value)
     this.transport.save(url, isPositive).then(resp => {
-      const article = (<IArticle[]>this._entity).find(article => article.id == args.id)
+      const article = this.articles.find(article => article.id == args.id)
       article.estimation = Number(resp) as Estimation
     })
   }
@@ -64,7 +66,7 @@ class ArticlesService extends EntityService<IArticle> {
     this.itemsIndex = [...this.itemsIndex, ...ids];
 
     // the raw data is actually string formatted, but supposed a date in model
-    (this._entity as IArticle[]).forEach(this._formatValues) 
+    this.articles.forEach(this._formatValues) 
     this._reorderByTime()
   }
 
@@ -81,10 +83,8 @@ class ArticlesService extends EntityService<IArticle> {
   }
 
   private _reorderByTime(): void {
-    this.state.isLoading = true
     const toNumber = (article: IArticle) => article.publishedAt.getTime()
-    this._entity.sort((older, newer) => toNumber(newer) - toNumber(older))
-    this.state.isLoading = false
+    this.articles.sort((older, newer) => toNumber(newer) - toNumber(older))
   }
 }
 

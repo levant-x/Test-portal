@@ -6,7 +6,8 @@ export enum Paths {
   logout = '/logout'
 }
 
-export enum Estimation { disliked, liked, none }
+export enum Estimation { disliked, liked, none } // !!! this order must remain this
+// as of the indexation and type conversion compartibility
 
 
 export type Options = Record<string, any> & {

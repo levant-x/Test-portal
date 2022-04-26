@@ -1,3 +1,4 @@
+import { toJS } from "mobx";
 import { CSSProperties } from "react"
 import { Button, Card } from "reactstrap";
 import useEntity from "../../application/use-entity";
@@ -29,7 +30,7 @@ export default function Profile() {
   }
 
   return (
-    <FormFrame model={entity} isLoading={isSaving} onClick={save}>
+    <FormFrame model={entity} isLoading={isSaving} onClick={save} errors={errors}>
       <div className="d-flex justify-content-between">
         <Card body className={cardClass} style={formStyle}>
           <FormSection
