@@ -6,7 +6,7 @@ namespace Portal.Interfaces
 {
     public interface ICountable
     {
-        public int Total { get; }
+        int Total { get; }
     }
 
     public interface IData
@@ -21,7 +21,7 @@ namespace Portal.Interfaces
         string Password { get; set; }
     }
 
-    public interface IProfile: IData
+    interface IProfile: IData
     {
         string FirstName { get; set; }
         string Surname { get; set; }
@@ -31,7 +31,7 @@ namespace Portal.Interfaces
 
     public interface IContentBase: IData
     {
-        public int AuthorID { get; set; }
+        int AuthorID { get; set; }
         IUser Author { get; set; }
     }
 
@@ -41,22 +41,9 @@ namespace Portal.Interfaces
         DateTime PublishedAt { get; set; }
     }
 
-    public interface IEstimation : IContentBase
+    interface IEstimation : IContentBase
     {        
         bool IsPositive { get; set; }
-    }
-
-    public interface ISaveResult
-    {
-        IData Entity { get; set; }
-        IDictionary<string, string> Errors { get; }
-    }
-
-    public interface IArticlesService: ICountable, IDisposable
-    {
-        IEnumerable GetFeed(int page);
-        IContent GetByID(int id);
-        ISaveResult PublishArticle(string text);
     }
 
     public interface ICredentials
@@ -69,12 +56,32 @@ namespace Portal.Interfaces
         IUser Bearer { get; set; }
     }
 
+    public interface ISaveResult<T>
+    {
+        T Value { get; set; }
+        IDictionary<string, string> Errors { get; }
+    }
+
+    public interface IDeletable
+    {
+        bool Delete(int id);
+    }
+
+    public interface IArticlesService: ICountable, IDeletable, IDisposable
+    {
+        IEnumerable GetFeed(int page);
+        IContent GetByID(int id);
+        ISaveResult<IContent> PublishArticle(string text);
+        ISaveResult<bool?> Estimate(int id, bool isPositive);
+        ISaveResult<IContent> Estimate(int id, IContent comment);
+    }
+
     public interface IUsersService: IDisposable
     {
         IUser GetByID(int id);    
         bool RegisterNew(IUser user);
         IAuthResult Authenticate(string login, string password);
-        ISaveResult Update(IUser user);
+        ISaveResult<IUser> Update(IUser user);
         void Logout();
     }
 }

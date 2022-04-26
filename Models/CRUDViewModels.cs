@@ -3,9 +3,9 @@ using Portal.Interfaces;
 
 namespace Portal.Models
 {
-    public class SaveResultVM: ISaveResult
+    public class SaveResultVM<T>: ISaveResult<T>
     {
-        public IData Entity { get; set; }
+        public T Value { get; set; }
         public IDictionary<string, string> Errors { get; } 
 
         public SaveResultVM(IDictionary<string, string> errors = null)

@@ -60,9 +60,9 @@ namespace Portal.Services
             return dataContext.SaveChanges() == 1;
         }
 
-        public ISaveResult Update(IUser user)
+        public ISaveResult<IUser> Update(IUser user)
         {
-            var result = new SaveResultVM();
+            var result = new SaveResultVM<IUser>();
             var toBeUnique = dataContext.Users
                 .Where(existing => (existing.Email == user.Email || existing
                 .Phone == user.Phone) && existing.ID != user.ID)
@@ -78,7 +78,7 @@ namespace Portal.Services
 
             dataContext.Update(user);
             dataContext.SaveChanges();
-            result.Entity = user;
+            result.Value = user;
             return result;
         }
 

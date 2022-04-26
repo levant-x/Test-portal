@@ -10,6 +10,7 @@ namespace Portal.Services
 
         public DbSet<User> Users { get; set; }
         public DbSet<Article> Articles { get; set; }
+        public DbSet<Estimation> Estimation { get; set; }
 
         public DataContext(DbContextOptions<DataContext> options): base(options)
         {

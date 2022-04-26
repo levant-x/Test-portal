@@ -6,9 +6,7 @@ export enum Paths {
   logout = '/logout'
 }
 
-export enum Estimation {
-  liked, disliked,
-}
+export enum Estimation { disliked, liked, none }
 
 
 export type Options = Record<string, any> & {
@@ -17,13 +15,9 @@ export type Options = Record<string, any> & {
   body?: any
 }
 
-export type Message = Options & IData & {
-  type?: 'alert' | 'close' | 'update'
-}
+export type Message = Options & IData & { type?: 'alert' | 'close' | 'update' }
 
-export type FormProps = {
-  model: any
-}
+export type FormProps = { model: any }
 
 export type FormInputProps = IExplainer & {
   attributeName: string 
@@ -32,42 +26,28 @@ export type FormInputProps = IExplainer & {
 }
 
 
-export interface IData {
-  id: number
-}
+export interface IData { id: number }
 
-export interface IChildren {
-  children?: React.ReactNode
-}
+export interface IChildren { children?: React.ReactNode }
 
-export interface ILoading {
-  readonly isLoading: boolean
-}
+export interface IHoverable { onHover?(element: Element): void }
 
-export interface IPageable {
-  readonly currentPage: number
-}
+export interface ILoading { readonly isLoading: boolean }
 
-export interface IExplainer {
-  readonly errors?: Record<string, string> 
-}
+export interface IPageable { readonly currentPage: number }
+
+export interface IExplainer { readonly errors?: Record<string, string> }
 
 export interface ILoadable extends ILoading {
   mode: 'one' | 'many'
   load(url?: string): void
 }
 
-export interface IClickable {
-  onClick?: Function
-}
+export interface IClickable<T = undefined> { onClick?: (args: T) => void }
 
-export interface INotifyable {
-  notify(message: Message): void
-}
+export interface INotifyable { notify(message: Message): void }
 
-export interface INotifier {
-  readonly messages: Message[]  
-}
+export interface INotifier { readonly messages: Message[] }
 
 export interface IEntityStore<T extends IData> extends ILoadable, IExplainer {  
   readonly entity?: T | T[]
@@ -76,14 +56,12 @@ export interface IEntityStore<T extends IData> extends ILoadable, IExplainer {
   save(): void
 }
 
-export interface IDeletable {
-  delete(id: number): Promise<boolean>
-}
+export interface IDeletable { delete(id: number): Promise<boolean> }
 
 export interface ITransport {
   loadOne<T>(url: string, options?: Options): Promise<T>
   loadMany<T>(url: string, options?: Options): Promise<T[]>
-  save(url: string, item: IData): Promise<IData>
+  save(url: string, item: IData | any): Promise<IData>
 }
 
 export interface IPagination extends IPageable, Pick<ILoadable, 'load'> {

@@ -7,13 +7,13 @@ namespace Portal.Helpers
 {
     static class ModelHelper
     {
-        public static SaveResultVM GetModelErrors(ModelStateDictionary modelState)
+        public static SaveResultVM<object> GetModelErrors(ModelStateDictionary modelState)
         {
             var errors = modelState.Keys
                 .Where(key => modelState[key].Errors.Count > 0)
                 .ToDictionary(key => key.ToLower(), key => string.Join('\n', modelState[key].Errors
                 .Select(error => error.ErrorMessage)));
-            return new SaveResultVM(errors);
+            return new SaveResultVM<object>(errors);
         }
 
         public static void MarkDuplication(IDictionary<string, string> errors, List<User> scope, 

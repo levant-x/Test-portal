@@ -17,21 +17,17 @@ export default function HandsCounter({
   onHoverChange,
   onClick,
 }: Props) {
-  const isOnClass = isOn ? LIKE_ACTIVE_CLASS_NAME : ''
-
   return (
-    <>
-      <span className={`${isOnClass}${className} ms-1`}>
-        {count} 
+    <span className={`${isOn ? LIKE_ACTIVE_CLASS_NAME : ''}${className} ms-1`}>
+      <span className="mx-1">{count}</span>
 
-        <span 
-          onClickCapture={() => onClick?.()}
-          onMouseOver={e => onHoverChange?.(e.target as Element, true)}
-          onMouseLeave={e => onHoverChange?.(e.target as Element, false)}
-        >
-          {children}
-        </span>
+      <span 
+        onClickCapture={() => onClick?.()}
+        onMouseOver={e => onHoverChange?.(e.target as Element, true)}
+        onMouseLeave={e => onHoverChange?.(e.target as Element, false)}
+      >
+        {children}
       </span>
-    </>
+    </span>
   )
 }

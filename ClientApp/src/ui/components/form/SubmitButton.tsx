@@ -17,7 +17,7 @@ export default function SubmitButton({
   onClick,
 }:Props) {
   return (
-    <Button style={style} className={className} color="success" onClick={() => onClick?.()}>
+    <Button style={style} className={className} color="success" onClick={onClick}>
       {isLoading ? <Preloader small color="light" /> : (children ?? 'Сохранить')}
     </Button>
   )

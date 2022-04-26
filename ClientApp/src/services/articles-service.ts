@@ -1,7 +1,7 @@
 import { computed, makeObservable, reaction } from "mobx"
 import { APIEndpoints } from "../config/consts"
 import transport from "../infrastructure/transport"
-import { IExplainer, IPagination, ITransport } from "../types/common"
+import { Estimation, IData, IExplainer, IPagination, ITransport } from "../types/common"
 import { IArticle } from "../types/models"
 import EntityService from "./entity-service"
 import PaginationService from "./pagination-service"
@@ -30,6 +30,15 @@ class ArticlesService extends EntityService<IArticle> {
     super.load()
   }
 
+  estimate( args: { value: Estimation } & IData): void {
+    const url = APIEndpoints.articleEstimate.replace('{id}', args.id.toString())
+    const isPositive = Boolean(args.value)
+    this.transport.save(url, isPositive).then(resp => {
+      const article = (<IArticle[]>this._entity).find(article => article.id == args.id)
+      article.estimation = Number(resp) as Estimation
+    })
+  }
+
   protected override beforeLoad(): boolean {
     const url = APIEndpoints.articles
     this.paginationService.load(url)
@@ -55,18 +64,20 @@ class ArticlesService extends EntityService<IArticle> {
     this.itemsIndex = [...this.itemsIndex, ...ids];
 
     // the raw data is actually string formatted, but supposed a date in model
-    (this._entity as IArticle[]).forEach(this._formatPublishedAtType) 
+    (this._entity as IArticle[]).forEach(this._formatValues) 
     this._reorderByTime()
   }
 
   protected override afterSaveSuccessful(article: IArticle): void {
-    this._formatPublishedAtType(article) // make a new look like the rest
+    this._formatValues(article) // make a new look like the rest
     super.afterSaveSuccessful(article)
     this._reorderByTime()
   }
 
-  private _formatPublishedAtType(article: IArticle): void {
+  private _formatValues(article: IArticle): void {
     article.publishedAt = new Date(article.publishedAt.toString())
+    if (article.estimation === null) article.estimation = Estimation.none
+    else article.estimation = Number(article.estimation) as Estimation
   }
 
   private _reorderByTime(): void {

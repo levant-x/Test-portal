@@ -3,10 +3,14 @@ using Portal.Interfaces;
 using Portal.Services;
 using Portal.Attributes;
 using Portal.Models;
-using Portal.Helpers;
 
 namespace Portal.Controllers
 {
+    enum EstimationType
+    {
+        Disliked, Liked, None,
+    }
+
     [ApiController]
     [Route("api/[controller]")]
     [Authorize]
@@ -45,8 +49,18 @@ namespace Portal.Controllers
         [HttpPost]
         public IActionResult Post(Article article)
         {
-            article = (Article)articlesService.PublishArticle(article.Body).Entity;
+            article = (Article)articlesService.PublishArticle(article.Body).Value;
             return new JsonResult(article);
+        }
+
+        [HttpPost("{id:int}/estimate")]
+        public IActionResult PostEstimation([FromRoute] int id, [FromBody] bool isPositive)
+        {
+            var result = articlesService.Estimate(id, isPositive);
+            if (result == null) return BadRequest();
+            var estimation = result.Value == true ? EstimationType.Liked :
+                result.Value == false ? EstimationType.Disliked : EstimationType.None;
+            return Ok(estimation);
         }
     }
 }

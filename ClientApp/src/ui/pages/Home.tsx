@@ -49,7 +49,11 @@ export default function Home() {
       </FormFrame>     
 
       {articles?.map((article) => 
-        <ArticlePreview key={article.id} {...article} />
+        <ArticlePreview 
+          key={article.id} 
+          article={article} 
+          onClick={args => articlesService.estimate(args)} 
+        />
       )}
 
       {isLoading && <Preloader />}
